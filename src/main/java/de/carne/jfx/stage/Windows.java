@@ -29,6 +29,10 @@ import javafx.stage.WindowEvent;
  */
 public final class Windows {
 
+	private Windows() {
+		// Make sure this class is not instantiated from outside
+	}
+	
 	/**
 	 * Make sure a {@link Consumer} is invoked as soon as a corresponding
 	 * {@link Window} is about to get closed.

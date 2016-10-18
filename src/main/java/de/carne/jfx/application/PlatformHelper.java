@@ -16,14 +16,24 @@
  */
 package de.carne.jfx.application;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
 
+import de.carne.OS;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 
 /**
  * Utility class providing {@link Platform} related functions.
  */
 public final class PlatformHelper {
+
+	private PlatformHelper() {
+		// Make sure this class is not instantiated from outside
+	}
 
 	/**
 	 * Wrap a {@link Runnable} to make sure it is always invoked on the JavaFX
@@ -33,7 +43,7 @@ public final class PlatformHelper {
 	 *        thread.
 	 * @return The wrapped {@link Runnable}.
 	 */
-	public static Runnable runLater(Runnable runnable) {
+	public static Runnable runLaterRunnable(Runnable runnable) {
 		return new Runnable() {
 
 			@Override
@@ -64,6 +74,72 @@ public final class PlatformHelper {
 			}
 
 		};
+	}
+
+	/**
+	 * Make sure a {@link Supplier} is always invoked on the JavaFX application
+	 * thread.
+	 * 
+	 * @param supplier The supplier to invoke.
+	 * @return The supllier result.
+	 */
+	public static <R> R runLater(Supplier<R> supplier) {
+		R result;
+
+		if (Platform.isFxApplicationThread()) {
+			result = supplier.get();
+		} else {
+			CountDownLatch latch = new CountDownLatch(1);
+			AtomicReference<R> resultHolder = new AtomicReference<>(null);
+
+			Platform.runLater(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+						resultHolder.set(supplier.get());
+					} finally {
+						latch.countDown();
+					}
+				}
+
+			});
+			try {
+				latch.await();
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
+			result = resultHolder.get();
+		}
+		return result;
+	}
+
+	private static final Image[] EMPTY_ICONS = new Image[0];
+
+	/**
+	 * Filter stage icons according to platform preference.
+	 *
+	 * @param icons The available icons.
+	 * @return The filtered icons.
+	 */
+	public static Image[] stageIcons(Image... icons) {
+		if (OS.IS_OSX) {
+			return EMPTY_ICONS;
+		}
+		return icons;
+	}
+
+	/**
+	 * Filter stage icons according to platform preference.
+	 *
+	 * @param icons The available icons.
+	 * @return The filtered icons.
+	 */
+	public static Collection<Image> stageIcons(Collection<Image> icons) {
+		if (OS.IS_OSX) {
+			return Collections.emptyList();
+		}
+		return icons;
 	}
 
 }
