@@ -19,6 +19,7 @@ package de.carne.jfx.stage;
 import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
@@ -28,6 +29,7 @@ import de.carne.jfx.scene.control.DialogController;
 import de.carne.util.ObjectHolder;
 import de.carne.util.logging.Log;
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -49,6 +51,8 @@ public abstract class StageController extends FXMLController<Stage> {
 
 	private static final ObjectHolder<ScheduledExecutorService> EXECUTOR_SERVICE = new ObjectHolder<>(
 			() -> Executors.newSingleThreadScheduledExecutor());
+
+	private final AtomicInteger backgroundTaskCount = new AtomicInteger(0);
 
 	/**
 	 * Get the {@link ScheduledExecutorService} shared by all stage controllers.
@@ -195,6 +199,31 @@ public abstract class StageController extends FXMLController<Stage> {
 	}
 
 	/**
+	 * This function is called to block/unblock this stage when either the first
+	 * background task has been scheduled or the last background task has been
+	 * finished.
+	 *
+	 * @param blocked Whether the stage should blocked or unblocked.
+	 * @see BackgroundTask
+	 */
+	protected void setBlocked(boolean blocked) {
+		getUI().getScene().getRoot().setDisable(blocked);
+	}
+
+	/**
+	 * Check whether this stage is currently blocked.
+	 * <p>
+	 * A stage is considered block when at least one unfinished background task
+	 * exists.
+	 *
+	 * @return {@code true} if at least one unfinished background task exists.
+	 * @see BackgroundTask
+	 */
+	public boolean isBlocked() {
+		return this.backgroundTaskCount.get() != 0;
+	}
+
+	/**
 	 * Get the {@link Preferences} object associated with this stage.
 	 * <p>
 	 * Override this function to associate a {@link Preferences} object with
@@ -263,6 +292,47 @@ public abstract class StageController extends FXMLController<Stage> {
 				LOG.warning(e, "An error occurred while syncing preferences ''{0}''", preferences);
 			}
 		}
+	}
+
+	final void onTaskScheduled() {
+		if (this.backgroundTaskCount.getAndIncrement() == 0) {
+			setBlocked(true);
+		}
+	}
+
+	final void onTaskFinished() {
+		if (this.backgroundTaskCount.decrementAndGet() == 0) {
+			setBlocked(false);
+		}
+	}
+
+	/**
+	 * Base class for {@link Task} run by this stage.
+	 *
+	 * @param <V> The tasks result/value type.
+	 */
+	protected abstract class BackgroundTask<V> extends Task<V> {
+
+		@Override
+		protected void scheduled() {
+			onTaskScheduled();
+		}
+
+		@Override
+		protected void succeeded() {
+			onTaskFinished();
+		}
+
+		@Override
+		protected void cancelled() {
+			onTaskFinished();
+		}
+
+		@Override
+		protected void failed() {
+			onTaskFinished();
+		}
+
 	}
 
 }
