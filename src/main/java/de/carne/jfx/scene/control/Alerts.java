@@ -16,6 +16,9 @@
  */
 package de.carne.jfx.scene.control;
 
+import java.util.Collection;
+import java.util.logging.LogRecord;
+
 import de.carne.jfx.util.DialogHelper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -31,33 +34,52 @@ public final class Alerts {
 	}
 
 	/**
-	 * Creates an unexpected error {@link Alert} of type
-	 * {@link AlertType#ERROR}.
+	 * Create an unexpected error {@link Alert} of type {@link AlertType#ERROR}.
 	 *
-	 * @param e The optional {@link Throwable} providing the alert details.
+	 * @param throwable The optional {@link Throwable} providing the alert
+	 *        details.
 	 * @return The created alert.
 	 */
-	public static Alert error(Throwable e) {
-		Alert alert = new Alert(AlertType.ERROR, AlertsI18N.formatSTR_MESSAGE_UNEXPECTED_ERROR(), ButtonType.OK);
-
-		alert.setHeaderText(AlertsI18N.formatSTR_MESSAGE_APPLICATION_ERROR());
-		DialogHelper.setExceptionContent(alert, e);
-		return alert;
+	public static Alert unexpected(Throwable throwable) {
+		return message(AlertType.ERROR, AlertsI18N.formatSTR_MESSAGE_UNEXPECTED_ERROR(), throwable);
 	}
 
 	/**
-	 * Creates an error message {@link Alert} of type {@link AlertType#ERROR}.
-	 * 
+	 * Create an application error message {@link Alert} with {@link Throwable}
+	 * details.
+	 *
+	 * @param type The alert type to create.
 	 * @param message The error message to display.
-	 * @param e The optional {@link Throwable} providing the alert details.
+	 * @param throwable The optional {@link Throwable} providing the alert
+	 *        details.
 	 * @return The created alert.
 	 */
-	public static Alert error(String message, Throwable e) {
-		Alert alert = new Alert(AlertType.ERROR, message, ButtonType.OK);
+	public static Alert message(AlertType type, String message, Throwable throwable) {
+		assert message != null;
+
+		Alert alert = new Alert(type, message, ButtonType.OK);
 
 		alert.setHeaderText(AlertsI18N.formatSTR_MESSAGE_APPLICATION_ERROR());
-		DialogHelper.setExceptionContent(alert, e);
-		return alert;
+		return DialogHelper.setExceptionContent(alert, throwable);
+	}
+
+	/**
+	 * Create an application error message {@link Alert} with {@link LogRecord}
+	 * details.
+	 *
+	 * @param type The alert type to create.
+	 * @param message The error message to display.
+	 * @param logs The optional collection of {@link LogRecord}s providing the
+	 *        alert details.
+	 * @return The created alert.
+	 */
+	public static Alert logs(AlertType type, String message, Collection<LogRecord> logs) {
+		assert message != null;
+
+		Alert alert = new Alert(type, message, ButtonType.OK);
+
+		alert.setHeaderText(AlertsI18N.formatSTR_MESSAGE_APPLICATION_ERROR());
+		return DialogHelper.setLogRecordsContent(alert, logs);
 	}
 
 }

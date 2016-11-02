@@ -16,10 +16,11 @@
  */
 package de.carne.jfx.util;
 
-import de.carne.util.Exceptions;
+import java.util.Collection;
+import java.util.logging.LogRecord;
+
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
-import javafx.scene.control.TextArea;
 
 /**
  * Utility class providing {@link Dialog} related functions.
@@ -35,35 +36,31 @@ public class DialogHelper {
 	 * {@link DialogPane} as an expandable content.
 	 *
 	 * @param dialog The dialog to add the exception to.
-	 * @param exception The exception to add (may by {@code null}).
+	 * @param throwable The exception to add (may by {@code null}).
 	 * @return The updated dialog.
 	 * @see DialogPane#setExpandableContent(javafx.scene.Node)
 	 */
-	public static <R, T extends Dialog<R>> T setExceptionContent(T dialog, Throwable exception) {
+	public static <R, T extends Dialog<R>> T setExceptionContent(T dialog, Throwable throwable) {
 		assert dialog != null;
 
-		setExceptionContent(dialog.getDialogPane(), exception);
+		DialogPaneHelper.setExceptionContent(dialog.getDialogPane(), throwable);
 		return dialog;
 	}
 
 	/**
-	 * Add an {@link Exception}'s stack trace to a {@link DialogPane} as an
-	 * expandable content.
+	 * Add a collection of {@link LogRecord}'s to a {@link Dialog}'s
+	 * {@link DialogPane} as an expandable content.
 	 *
-	 * @param dialogPane The dialog pane to add the exception to.
-	 * @param exception The exception to add (may by {@code null}).
+	 * @param dialog The dialog to add the exception to.
+	 * @param logs The collection of log records to add (may by {@code null}).
+	 * @return The updated dialog.
 	 * @see DialogPane#setExpandableContent(javafx.scene.Node)
 	 */
-	public static void setExceptionContent(DialogPane dialogPane, Throwable exception) {
-		assert dialogPane != null;
+	public static <R, T extends Dialog<R>> T setLogRecordsContent(T dialog, Collection<LogRecord> logs) {
+		assert dialog != null;
 
-		if (exception != null) {
-			TextArea content = new TextArea(Exceptions.getStackTrace(exception));
-
-			content.setEditable(false);
-			content.setBackground(dialogPane.getBackground());
-			dialogPane.setExpandableContent(content);
-		}
+		DialogPaneHelper.setLogRecordsContent(dialog.getDialogPane(), logs);
+		return dialog;
 	}
 
 }
