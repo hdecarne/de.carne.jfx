@@ -11,9 +11,9 @@
    <children>
       <TableView fx:id="ctlLogRecords" VBox.vgrow="ALWAYS">
         <columns>
-          <TableColumn fx:id="ctlLogRecordLevel" maxWidth="1.7976931348623157E308" prefWidth="32.0" text="%_STR_COL_LEVEL" />
+          <TableColumn fx:id="ctlLogRecordLevel" maxWidth="1.7976931348623157E308" prefWidth="32.0" style="-fx-alignment: CENTER;" text="%_STR_COL_LEVEL" />
           <TableColumn fx:id="ctlLogRecordTime" maxWidth="1.7976931348623157E308" prefWidth="100.0" text="%_STR_COL_TIME" />
-            <TableColumn fx:id="ctlLogRecordThread" maxWidth="1.7976931348623157E308" prefWidth="40.0" text="%_STR_COL_THREAD" />
+            <TableColumn fx:id="ctlLogRecordThread" maxWidth="1.7976931348623157E308" prefWidth="40.0" style="-fx-alignment: CENTER-RIGHT;" text="%_STR_COL_THREAD" />
             <TableColumn fx:id="ctlLogRecordMessage" maxWidth="1.7976931348623157E308" prefWidth="400.0" text="%_STR_COL_MESSAGE" />
         </columns>
       </TableView>
