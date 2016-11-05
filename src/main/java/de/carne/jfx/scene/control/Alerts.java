@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.logging.LogRecord;
 
 import de.carne.jfx.util.DialogHelper;
+import de.carne.util.logging.Log;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -28,6 +29,8 @@ import javafx.scene.control.ButtonType;
  * Utility class providing {@link Alert} related functions.
  */
 public final class Alerts {
+
+	private static Log LOG = new Log();
 
 	private Alerts() {
 		// Make sure this class is not instantiated from outside
@@ -57,6 +60,8 @@ public final class Alerts {
 	public static Alert message(AlertType type, String message, Throwable throwable) {
 		assert message != null;
 
+		logAlertMessage(type, message, throwable);
+
 		Alert alert = new Alert(type, message, ButtonType.OK);
 
 		alert.setHeaderText(AlertsI18N.formatSTR_MESSAGE_APPLICATION_ERROR());
@@ -76,10 +81,22 @@ public final class Alerts {
 	public static Alert logs(AlertType type, String message, Collection<LogRecord> logs) {
 		assert message != null;
 
+		logAlertMessage(type, message, null);
+
 		Alert alert = new Alert(type, message, ButtonType.OK);
 
 		alert.setHeaderText(AlertsI18N.formatSTR_MESSAGE_APPLICATION_ERROR());
 		return DialogHelper.setLogRecordsContent(alert, logs);
+	}
+
+	private static void logAlertMessage(AlertType type, String message, Throwable throwable) {
+		if (AlertType.ERROR.equals(type)) {
+			LOG.error(throwable, message);
+		} else if (AlertType.WARNING.equals(type)) {
+			LOG.error(throwable, message);
+		} else if (AlertType.INFORMATION.equals(type)) {
+			LOG.info(throwable, message);
+		}
 	}
 
 }

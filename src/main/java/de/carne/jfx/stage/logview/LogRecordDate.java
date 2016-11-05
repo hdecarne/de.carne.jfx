@@ -16,36 +16,31 @@
  */
 package de.carne.jfx.stage.logview;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.logging.Formatter;
-import java.util.logging.LogRecord;
+import java.util.Date;
 
 /**
- * Utility class used to define the text formats used to display log messages in
- * the UI.
+ * Wrapper class for {@link Date} used to apply a log specific date formating.
  */
-public final class LogViewFormats {
+public class LogRecordDate extends Date {
+
+	/*
+	 * Serialization support
+	 */
+	private static final long serialVersionUID = 5846084302347518381L;
 
 	/**
-	 * {@code Formatter} for log message formatting.
+	 * Construct {@code LogRecordDate}.
+	 *
+	 * @param date The initial date value in ms.
+	 * @see Date#Date(long)
 	 */
-	public static final Formatter MESSAGE_FORMAT = new Formatter() {
+	public LogRecordDate(long date) {
+		super(date);
+	}
 
-		@Override
-		public String format(LogRecord record) {
-			return formatMessage(record);
-		}
-
-	};
-
-	/**
-	 * {@link DateFormat} for log time formatting.
-	 */
-	public static final DateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss,SSS");
-
-	private LogViewFormats() {
-		// Make sure this class is not instantiated from outside
+	@Override
+	public String toString() {
+		return LogViewFormats.TIME_FORMAT.format(this);
 	}
 
 }
