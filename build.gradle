@@ -5,16 +5,20 @@ dependencies {
 }
 
 sourceSets {
+	// Add source directory for generated sources
 	generated {
 		java {
 			srcDir "${buildDir}/generated/main/java/"
 		}
 	}
+
+	// Make generated classes/resources available to the main source set
 	main {
 		compileClasspath += sourceSets.generated.runtimeClasspath
 	}
 }
 
 jar {
+	// Include generated classes/resources in jar 
 	from sourceSets.generated.runtimeClasspath
 }
