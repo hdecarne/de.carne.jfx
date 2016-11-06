@@ -26,14 +26,14 @@ import de.carne.jfx.util.ImageRegistry;
  */
 public class LogViewImages {
 
+	private LogViewImages() {
+		// Make sure this class is not instantiated from outside
+	}
+
 	/**
 	 * Log level images.
 	 */
 	public static final ImageRegistry<Level> LEVEL_IMAGES = new ImageRegistry<>(
 			(o1, o2) -> Integer.compare(o1.intValue(), o2.intValue()));
-
-	private LogViewImages() {
-		// Make sure this class is not instantiated from outside
-	}
 
 }

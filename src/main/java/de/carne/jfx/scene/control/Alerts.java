@@ -30,11 +30,11 @@ import javafx.scene.control.ButtonType;
  */
 public final class Alerts {
 
-	private static Log LOG = new Log();
-
 	private Alerts() {
 		// Make sure this class is not instantiated from outside
 	}
+
+	private static Log LOG = new Log();
 
 	/**
 	 * Create an unexpected error {@link Alert} of type {@link AlertType#ERROR}.

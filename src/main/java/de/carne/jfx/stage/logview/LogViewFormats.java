@@ -27,6 +27,10 @@ import java.util.logging.LogRecord;
  */
 public final class LogViewFormats {
 
+	private LogViewFormats() {
+		// Make sure this class is not instantiated from outside
+	}
+
 	/**
 	 * {@code Formatter} for log message formatting.
 	 */
@@ -43,9 +47,5 @@ public final class LogViewFormats {
 	 * {@link DateFormat} for log time formatting.
 	 */
 	public static final DateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss,SSS");
-
-	private LogViewFormats() {
-		// Make sure this class is not instantiated from outside
-	}
 
 }

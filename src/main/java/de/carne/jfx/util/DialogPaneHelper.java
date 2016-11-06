@@ -36,11 +36,11 @@ import javafx.util.Callback;
  */
 public final class DialogPaneHelper {
 
-	private static final double IMAGE_SIZE16 = 16.0;
-
 	private DialogPaneHelper() {
 		// Make sure this class is not instantiated from outside
 	}
+
+	private static final double IMAGE_SIZE16 = 16.0;
 
 	/**
 	 * Add an {@link Exception}'s stack trace to a {@link DialogPane} as an
