@@ -1,14 +1,20 @@
 apply plugin: 'de.carne.gradleplugins.java'
 
+dependencies {
+    compile project(':de.carne')
+}
+
 sourceSets {
 	generated {
-		java.srcDir "${buildDir}/generated/main/java/"
+		java {
+			srcDir "${buildDir}/generated/main/java/"
+		}
 	}
 	main {
 		compileClasspath += sourceSets.generated.runtimeClasspath
 	}
 }
 
-dependencies {
-    compile project(':de.carne')
+jar {
+	from sourceSets.generated.runtimeClasspath
 }
