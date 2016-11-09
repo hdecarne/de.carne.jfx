@@ -97,7 +97,7 @@ public class AboutInfoController extends DialogController<ButtonType> {
 				AnchorPane.setBottomAnchor(infoTextArea, 0.0);
 				this.ctlInfoTabs.getTabs().add(new Tab(infoTitle, infoTextPane));
 			} catch (IOException e) {
-				Exceptions.ignore(e);
+				Exceptions.warn(e);
 			}
 		}
 		return this;
