@@ -32,7 +32,6 @@ import de.carne.util.logging.Log;
 import de.carne.util.logging.LogBuffer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,14 +71,7 @@ public class LogViewController extends StageController {
 
 	};
 
-	private final ChangeListener<Boolean> toggleListener = new ChangeListener<Boolean>() {
-
-		@Override
-		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-			onToggled(newValue.booleanValue());
-		}
-
-	};
+	private final ChangeListener<Boolean> toggleListener = (p, o, n) -> onToggled(n.booleanValue());
 
 	private BooleanProperty toggleProperty = null;
 
@@ -147,7 +139,7 @@ public class LogViewController extends StageController {
 		return null;
 	}
 
-	void onShowingChanged(boolean showing) {
+	private void onShowingChanged(boolean showing) {
 		if (showing) {
 			LogBuffer.addHandler(LOG.getLogger(), this.logHandler);
 		} else {
@@ -156,7 +148,7 @@ public class LogViewController extends StageController {
 		}
 	}
 
-	void onToggled(boolean selected) {
+	private void onToggled(boolean selected) {
 		if (!selected) {
 			close(false);
 		}
@@ -180,14 +172,7 @@ public class LogViewController extends StageController {
 		this.ctlLogRecordTime.setCellValueFactory(new PropertyValueFactory<>("time"));
 		this.ctlLogRecordThread.setCellValueFactory(new PropertyValueFactory<>("thread"));
 		this.ctlLogRecordMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
-		stage.showingProperty().addListener(new ChangeListener<Boolean>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				onShowingChanged(newValue.booleanValue());
-			}
-
-		});
+		stage.showingProperty().addListener((p, o, n) -> onShowingChanged(n.booleanValue()));
 	}
 
 	/**

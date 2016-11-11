@@ -18,11 +18,7 @@ package de.carne.jfx.stage;
 
 import java.util.function.Consumer;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.stage.Window;
-import javafx.stage.WindowEvent;
 
 /**
  * Utility class providing {@link Window} related functions.
@@ -32,7 +28,7 @@ public final class Windows {
 	private Windows() {
 		// Make sure this class is not instantiated from outside
 	}
-	
+
 	/**
 	 * Make sure a {@link Consumer} is invoked as soon as a corresponding
 	 * {@link Window} is about to get closed.
@@ -46,15 +42,7 @@ public final class Windows {
 		assert window != null;
 		assert consumer != null;
 
-		window.onHidingProperty().addListener(new ChangeListener<EventHandler<WindowEvent>>() {
-
-			@Override
-			public void changed(ObservableValue<? extends EventHandler<WindowEvent>> observable,
-					EventHandler<WindowEvent> oldValue, EventHandler<WindowEvent> newValue) {
-				consumer.accept(t);
-			}
-
-		});
+		window.onHidingProperty().addListener((p, o, n) -> consumer.accept(t));
 		return t;
 	}
 
