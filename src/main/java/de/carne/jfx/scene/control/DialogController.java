@@ -21,7 +21,11 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import de.carne.jfx.fxml.FXMLController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.stage.Modality;
@@ -51,6 +55,11 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 			Class<C> controllerClass) throws IOException {
 
 		return loadUI(owner, dialogFactory, controllerClass);
+	}
+
+	@Override
+	public final Window getWindow() {
+		return getUI().getDialogPane().getScene().getWindow();
 	}
 
 	@Override
@@ -105,6 +114,33 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 	 */
 	protected void setupDialog(Dialog<R> dialog) {
 		// Nothing to do here
+	}
+
+	/**
+	 * Lookup a dialog button.
+	 * 
+	 * @param buttonType The button type to look up.
+	 * @return The button node or {@code null} if the button type has not been
+	 *         created.
+	 * @see DialogPane#lookupButton(ButtonType)
+	 */
+	protected final Node lookupButton(ButtonType buttonType) {
+		assert buttonType != null;
+
+		return getUI().getDialogPane().lookupButton(buttonType);
+	}
+
+	/**
+	 * Register a button event filter.
+	 *
+	 * @param buttonType The button type to register the filter for.
+	 * @param filter The filter to register.
+	 */
+	protected final void addButtonEventFilter(ButtonType buttonType, EventHandler<? super ActionEvent> filter) {
+		assert buttonType != null;
+		assert filter != null;
+
+		getUI().getDialogPane().lookupButton(buttonType).addEventFilter(ActionEvent.ACTION, filter);
 	}
 
 	/**

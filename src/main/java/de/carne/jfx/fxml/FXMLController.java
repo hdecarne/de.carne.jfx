@@ -80,6 +80,13 @@ public abstract class FXMLController<U> {
 	}
 
 	/**
+	 * Get the UI window.
+	 * 
+	 * @return The UI window.
+	 */
+	public abstract Window getWindow();
+
+	/**
 	 * Perform the basic UI setup by loading the UI resource bundle, the scene
 	 * content as well as the controller class and bind all together.
 	 *

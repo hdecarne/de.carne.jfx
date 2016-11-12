@@ -101,6 +101,11 @@ public abstract class StageController extends FXMLController<Stage> {
 	}
 
 	@Override
+	public final Window getWindow() {
+		return getUI();
+	}
+
+	@Override
 	protected void setupUI(Window owner, Stage stage, Parent fxmlRoot) {
 		stage.setScene(new Scene(fxmlRoot));
 		stage.initStyle(getStyle());

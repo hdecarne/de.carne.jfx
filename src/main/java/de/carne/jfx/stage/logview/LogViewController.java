@@ -115,7 +115,7 @@ public class LogViewController extends StageController {
 			try {
 				LogBuffer.exportTo(LOG.getLogger(), file);
 			} catch (IOException e) {
-				Alerts.unexpected(e);
+				Alerts.unexpected(e).showAndWait();
 			}
 		}
 
