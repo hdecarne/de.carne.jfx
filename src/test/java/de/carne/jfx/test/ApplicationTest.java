@@ -18,9 +18,6 @@ package de.carne.jfx.test;
 
 import org.junit.Test;
 
-import de.carne.jfx.test.application.TestApplication;
-import javafx.application.Application;
-
 /**
  * Test JFX application related code.
  */
@@ -31,7 +28,7 @@ public class ApplicationTest {
 	 */
 	@Test
 	public void startStopApplication() {
-		Application.launch(TestApplication.class);
+		// Application.launch(TestApplication.class);
 	}
 
 }
