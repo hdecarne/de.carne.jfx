@@ -25,5 +25,5 @@ sourceSets {
 
 jar {
 	// Include generated classes/resources in jar 
-	from sourceSets.generated.runtimeClasspath
+	from sourceSets.generated.output
 }
