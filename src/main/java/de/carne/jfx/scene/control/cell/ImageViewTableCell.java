@@ -24,7 +24,7 @@ import javafx.util.Callback;
 
 /**
  * {@link TableCell} implementation for drawing {@link Image} values.
- * 
+ *
  * @param <S> The type displayed in the containing table view.
  */
 public class ImageViewTableCell<S> extends TableCell<S, Image> {
@@ -34,7 +34,7 @@ public class ImageViewTableCell<S> extends TableCell<S, Image> {
 	/**
 	 * Create a cell factory for use in a {@link TableColumn}.
 	 *
-	 * @return A cell factory for creating image base cells.
+	 * @return A cell factory for creating image based cells.
 	 */
 	public static <T> Callback<TableColumn<T, Image>, TableCell<T, Image>> forTableColumn() {
 		return new Callback<TableColumn<T, Image>, TableCell<T, Image>>() {
