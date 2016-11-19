@@ -1,7 +1,9 @@
 apply plugin: 'de.carne.gradleplugins.java'
 
-dependencies {
-    compile project(':de.carne')
+configurations {
+	generatedCompile {
+		description = 'compile generated sources'
+	}
 }
 
 sourceSets {
@@ -11,19 +13,15 @@ sourceSets {
 			srcDir "${buildDir}/generated/main/java/"
 		}
 	}
-
-	// Make generated classes/resources available to the main and test source set
-	main {
-		compileClasspath += sourceSets.generated.output
-		runtimeClasspath += sourceSets.generated.output
-	}
-	test {
-		compileClasspath += sourceSets.generated.output
-		runtimeClasspath += sourceSets.generated.output
-	}
 }
 
 jar {
 	// Include generated classes/resources in jar 
 	from sourceSets.generated.output
+}
+
+dependencies {
+	generatedCompile("org.checkerframework:checker-qual:${checkerFrameworkVersion}")
+    compile sourceSets.generated.output
+    compile project(':de.carne')
 }
