@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import javafx.scene.image.Image;
 
 /**
@@ -166,7 +168,7 @@ public final class ImageRegistry<K> {
 		}
 
 		@Override
-		public boolean equals(Object obj) {
+		public boolean equals(@Nullable Object obj) {
 			boolean equal = false;
 
 			if (this == obj) {

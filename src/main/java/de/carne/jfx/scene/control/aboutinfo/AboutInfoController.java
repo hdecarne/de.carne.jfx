@@ -78,6 +78,11 @@ public class AboutInfoController extends DialogController<ButtonType> {
 		if (url != null) {
 			try (BufferedReader infoReader = new BufferedReader(new InputStreamReader(url.openStream()))) {
 				String infoTitle = infoReader.readLine();
+
+				if (infoTitle == null) {
+					throw new IllegalArgumentException("Empty info resource: " + url);
+				}
+
 				StringBuilder infoTextBuffer = new StringBuilder();
 				String infoTextLine;
 

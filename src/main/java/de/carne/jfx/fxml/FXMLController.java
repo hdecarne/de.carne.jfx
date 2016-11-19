@@ -17,10 +17,13 @@
 package de.carne.jfx.fxml;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import de.carne.util.logging.Log;
 import javafx.fxml.FXMLLoader;
@@ -49,9 +52,9 @@ public abstract class FXMLController<U> {
 
 	private static final Pattern CONTROLLER_NAME_PATTERN = Pattern.compile("^(.*)\\.(.+)Controller$");
 
-	private ResourceBundle resources = null;
+	private @Nullable ResourceBundle resources = null;
 
-	private U ui = null;
+	private @Nullable U ui = null;
 
 	final void setResources(ResourceBundle resources) {
 		this.resources = resources;
@@ -81,7 +84,7 @@ public abstract class FXMLController<U> {
 
 	/**
 	 * Get the UI window.
-	 * 
+	 *
 	 * @return The UI window.
 	 */
 	public abstract Window getWindow();
@@ -116,7 +119,8 @@ public abstract class FXMLController<U> {
 		String packageName = controllerNameMatcher.group(1);
 		String bundleName = packageName + "." + baseName + "I18N";
 		ResourceBundle bundle = ResourceBundle.getBundle(bundleName);
-		FXMLLoader loader = new FXMLLoader(controllerClass.getResource(fxmlResourceName), bundle);
+		FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(controllerClass.getResource(fxmlResourceName)),
+				bundle);
 		Parent fxmlRoot = loader.load();
 		C controller = loader.getController();
 
