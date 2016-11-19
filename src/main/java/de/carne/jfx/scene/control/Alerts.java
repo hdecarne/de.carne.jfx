@@ -44,7 +44,7 @@ public final class Alerts {
 	 * @return The created alert.
 	 */
 	public static Alert unexpected(Throwable throwable) {
-		return message(AlertType.ERROR, AlertsI18N.formatSTR_MESSAGE_UNEXPECTED_ERROR(), throwable);
+		return error(AlertType.ERROR, AlertsI18N.formatSTR_MESSAGE_UNEXPECTED_ERROR(), throwable);
 	}
 
 	/**
@@ -57,7 +57,8 @@ public final class Alerts {
 	 *        details.
 	 * @return The created alert.
 	 */
-	public static Alert message(AlertType type, String message, Throwable throwable) {
+	public static Alert error(AlertType type, String message, Throwable throwable) {
+		assert type != null;
 		assert message != null;
 
 		logAlertMessage(type, message, throwable);
@@ -66,6 +67,22 @@ public final class Alerts {
 
 		alert.setHeaderText(AlertsI18N.formatSTR_MESSAGE_APPLICATION_ERROR());
 		return DialogHelper.setExceptionContent(alert, throwable);
+	}
+
+	/**
+	 * Create a generic application message {@link Alert}.
+	 * 
+	 * @param type The alert type to create.
+	 * @param message The message to display.
+	 * @param buttons The buttons to display.
+	 * @return The created alert.
+	 */
+	public static Alert message(AlertType type, String message, ButtonType... buttons) {
+		assert type != null;
+		assert message != null;
+
+		Alert alert = new Alert(type, message, buttons);
+		return alert;
 	}
 
 	/**
