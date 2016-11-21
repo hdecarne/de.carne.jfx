@@ -22,6 +22,6 @@ jar {
 
 dependencies {
 	generatedCompile("org.checkerframework:checker-qual:${checkerFrameworkVersion}")
-    compile sourceSets.generated.output
+	compile sourceSets.generated.output
     compile project(':de.carne')
 }
