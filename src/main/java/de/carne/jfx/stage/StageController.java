@@ -39,6 +39,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 
 /**
  * Controller class for {@link Stage} based scenes.
@@ -107,6 +108,7 @@ public abstract class StageController extends FXMLController<Stage> {
 
 	@Override
 	protected void setupUI(Window owner, Stage stage, Parent fxmlRoot) {
+		stage.setOnCloseRequest((evt) -> onCloseRequest(evt));
 		stage.setScene(new Scene(fxmlRoot));
 		stage.initStyle(getStyle());
 		if (owner != null) {
@@ -296,6 +298,12 @@ public abstract class StageController extends FXMLController<Stage> {
 			} catch (BackingStoreException e) {
 				LOG.warning(e, "An error occurred while syncing preferences ''{0}''", preferences);
 			}
+		}
+	}
+
+	private void onCloseRequest(WindowEvent evt) {
+		if (isBlocked()) {
+			evt.consume();
 		}
 	}
 
