@@ -29,6 +29,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 /**
@@ -54,11 +55,18 @@ public final class DialogPaneHelper {
 		assert dialogPane != null;
 
 		if (exception != null) {
-			TextArea content = new TextArea(Exceptions.getStackTrace(exception));
+			TextArea traceView = new TextArea(Exceptions.getStackTrace(exception));
 
-			content.setEditable(false);
-			content.setBackground(dialogPane.getBackground());
-			dialogPane.setExpandableContent(content);
+			traceView.setEditable(false);
+			traceView.setBackground(dialogPane.getBackground());
+
+			AnchorPane traceViewPane = new AnchorPane(traceView);
+
+			AnchorPane.setLeftAnchor(traceView, 0.0);
+			AnchorPane.setTopAnchor(traceView, 0.0);
+			AnchorPane.setRightAnchor(traceView, 0.0);
+			AnchorPane.setBottomAnchor(traceView, 0.0);
+			dialogPane.setExpandableContent(traceViewPane);
 		}
 	}
 
@@ -74,9 +82,9 @@ public final class DialogPaneHelper {
 		assert dialogPane != null;
 
 		if (logRecords != null && !logRecords.isEmpty()) {
-			ListView<LogRecord> content = new ListView<>(FXCollections.observableArrayList(logRecords));
+			ListView<LogRecord> logView = new ListView<>(FXCollections.observableArrayList(logRecords));
 
-			content.setCellFactory(new Callback<ListView<LogRecord>, ListCell<LogRecord>>() {
+			logView.setCellFactory(new Callback<ListView<LogRecord>, ListCell<LogRecord>>() {
 
 				@Override
 				public ListCell<LogRecord> call(ListView<LogRecord> param) {
@@ -100,8 +108,15 @@ public final class DialogPaneHelper {
 				}
 
 			});
-			content.setBackground(dialogPane.getBackground());
-			dialogPane.setExpandableContent(content);
+			logView.setBackground(dialogPane.getBackground());
+
+			AnchorPane logViewPane = new AnchorPane(logView);
+
+			AnchorPane.setLeftAnchor(logView, 0.0);
+			AnchorPane.setTopAnchor(logView, 0.0);
+			AnchorPane.setRightAnchor(logView, 0.0);
+			AnchorPane.setBottomAnchor(logView, 0.0);
+			dialogPane.setExpandableContent(logViewPane);
 		}
 	}
 
