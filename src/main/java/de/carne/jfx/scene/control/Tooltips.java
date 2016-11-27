@@ -50,7 +50,7 @@ public final class Tooltips {
 	 *
 	 * @param region The region to display the tool tip for.
 	 * @param message The message to display:
-	 * @param image The image to display. May be {@code null}.
+	 * @param image The image to display (may be {@code null}).
 	 * @return The created tool tip.
 	 */
 	public static Tooltip show(Region region, String message, @Nullable Image image) {
