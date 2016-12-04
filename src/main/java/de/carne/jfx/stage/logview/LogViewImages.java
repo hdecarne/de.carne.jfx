@@ -18,7 +18,7 @@ package de.carne.jfx.stage.logview;
 
 import java.util.logging.Level;
 
-import de.carne.jfx.util.ImageRegistry;
+import de.carne.jfx.scene.image.ImageRegistry;
 
 /**
  * Utility class used to define the images used to display log messages in the
