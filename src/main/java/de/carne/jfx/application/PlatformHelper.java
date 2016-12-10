@@ -79,9 +79,9 @@ public final class PlatformHelper {
 	/**
 	 * Make sure a {@link Supplier} is always invoked on the JavaFX application
 	 * thread.
-	 * 
+	 *
 	 * @param supplier The supplier to invoke.
-	 * @return The supllier result.
+	 * @return The supplier result.
 	 */
 	public static <R> R runLater(Supplier<R> supplier) {
 		R result;
@@ -112,6 +112,38 @@ public final class PlatformHelper {
 			result = resultHolder.get();
 		}
 		return result;
+	}
+
+	/**
+	 * Make sure a {@link Runnable} is always invoked on the JavaFX application
+	 * thread.
+	 *
+	 * @param runnable The runnable to invoke.
+	 */
+	public static void runLater(Runnable runnable) {
+		if (Platform.isFxApplicationThread()) {
+			runnable.run();
+		} else {
+			CountDownLatch latch = new CountDownLatch(1);
+
+			Platform.runLater(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+						runnable.run();
+					} finally {
+						latch.countDown();
+					}
+				}
+
+			});
+			try {
+				latch.await();
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
+		}
 	}
 
 	private static final Image[] EMPTY_ICONS = new Image[0];
