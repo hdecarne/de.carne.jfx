@@ -24,6 +24,12 @@ addons:
     packages:
       - oracle-java8-installer
 
+# See https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+
 # See https://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
