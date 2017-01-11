@@ -33,11 +33,9 @@ import javafx.stage.Window;
 /**
  * This class is used for setting up and controlling FXML based scenes.
  * <p>
- * Controller classes must conform to the name pattern (.+)Controller and must
- * be derived from one of this class' subclasses. In addition a FXML file has to
- * be created for defining the scene content as well as a resource bundle for
- * text resources. All these artifacts are bound together by their names as
- * follows:
+ * Controller classes must conform to the name pattern (.+)Controller and must be derived from one of this class'
+ * subclasses. In addition a FXML file has to be created for defining the scene content as well as a resource bundle for
+ * text resources. All these artifacts are bound together by their names as follows:
  * <ul>
  * <li>MyStageController (controller class)</li>
  * <li>MyStage.fxml (FXML resource defining the stage content)</li>
@@ -90,15 +88,16 @@ public abstract class FXMLController<U> {
 	public abstract Window getWindow();
 
 	/**
-	 * Perform the basic UI setup by loading the UI resource bundle, the scene
-	 * content as well as the controller class and bind all together.
+	 * Perform the basic UI setup by loading the UI resource bundle, the scene content as well as the controller class
+	 * and bind all together.
 	 *
+	 * @param <U> The JavaFX UI object type.
+	 * @param <C> The actual {@code FXMLController} type.
 	 * @param owner The UI object's owner (may by {@code null}).
-	 * @param uiFactory The factory function used to create the actual UI object
-	 *        by invoking it with the constructed controller.
+	 * @param uiFactory The factory function used to create the actual UI object by invoking it with the constructed
+	 *        controller.
 	 * @param controllerClass The controller class to use.
-	 * @return The constructed controller which is bound to the constructed
-	 *         scene and UI object.
+	 * @return The constructed controller which is bound to the constructed scene and UI object.
 	 * @throws IOException if an I/O error occurs during stage setup.
 	 */
 	protected static <U, C extends FXMLController<U>> C loadUI(Window owner, Function<C, U> uiFactory,
@@ -134,8 +133,7 @@ public abstract class FXMLController<U> {
 	}
 
 	/**
-	 * This function is called during UI initialization to perform the actual UI
-	 * setup.
+	 * This function is called during UI initialization to perform the actual UI setup.
 	 *
 	 * @param owner The UI object's owner (may by {@code null}).
 	 * @param ui The constructed UI object.

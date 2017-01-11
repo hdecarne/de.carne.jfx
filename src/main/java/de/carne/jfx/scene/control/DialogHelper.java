@@ -32,9 +32,10 @@ public class DialogHelper {
 	}
 
 	/**
-	 * Add an {@link Exception}'s stack trace to a {@link Dialog}'s
-	 * {@link DialogPane} as an expandable content.
+	 * Add an {@link Exception}'s stack trace to a {@link Dialog}'s {@link DialogPane} as an expandable content.
 	 *
+	 * @param <R> The dialog's result type.
+	 * @param <T> The actual {@link Dialog} type.
 	 * @param dialog The dialog to add the exception to.
 	 * @param throwable The exception to add (may by {@code null}).
 	 * @return The updated dialog.
@@ -48,9 +49,10 @@ public class DialogHelper {
 	}
 
 	/**
-	 * Add a collection of {@link LogRecord}'s to a {@link Dialog}'s
-	 * {@link DialogPane} as an expandable content.
+	 * Add a collection of {@link LogRecord}'s to a {@link Dialog}'s {@link DialogPane} as an expandable content.
 	 *
+	 * @param <R> The dialog's result type.
+	 * @param <T> The actual {@link Dialog} type.
 	 * @param dialog The dialog to add the exception to.
 	 * @param logs The collection of log records to add (may by {@code null}).
 	 * @return The updated dialog.

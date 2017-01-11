@@ -34,10 +34,10 @@ public final class Controls {
 	/**
 	 * Reset a {@link ComboBox}'s content and selection.
 	 *
+	 * @param <T> The {@link ComboBox}'s element type.
 	 * @param control The {@link ComboBox} to reset.
 	 * @param defaultSet The {@link DefaultSet} to apply.
-	 * @param comparator The {@link Comparator} to use for combobox item
-	 *        sorting.
+	 * @param comparator The {@link Comparator} to use for combobox item sorting.
 	 */
 	public static <T> void resetComboBoxOptions(ComboBox<T> control, DefaultSet<T> defaultSet,
 			Comparator<T> comparator) {

@@ -24,7 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
 /**
- * Utility class for editing {@ListView} elements.
+ * Utility class for editing {@link ListView} elements.
  *
  * @param <T> The list element's type.
  */
@@ -35,7 +35,7 @@ public abstract class ListViewEditor<T> {
 	/**
 	 * Initialize the editor.
 	 *
-	 * @param listViewParam The {@ListView} control to use for editing.
+	 * @param listViewParam The {@link ListView} control to use for editing.
 	 * @return This editor.
 	 */
 	public ListViewEditor<T> init(ListView<T> listViewParam) {
@@ -118,17 +118,14 @@ public abstract class ListViewEditor<T> {
 	/**
 	 * Called during add or apply action to retrieve the current input.
 	 *
-	 * @return The entered list element or {@code null} if the current input is
-	 *         empty or not valid.
+	 * @return The entered list element or {@code null} if the current input is empty or not valid.
 	 */
 	protected abstract @Nullable T getInput();
 
 	/**
-	 * Called on selection change to initialize the input data with the current
-	 * selection.
+	 * Called on selection change to initialize the input data with the current selection.
 	 *
-	 * @param input The selected list element's data or {@code null} if nothing
-	 *        is selected.
+	 * @param input The selected list element's data or {@code null} if nothing is selected.
 	 */
 	protected abstract void setInput(@Nullable T input);
 

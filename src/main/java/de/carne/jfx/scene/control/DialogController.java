@@ -43,12 +43,13 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 	/**
 	 * Load and create new dialog.
 	 *
+	 * @param <R> The dialog's result type.
+	 * @param <C> The actual {@code DialogController} type.
 	 * @param owner The dialog's owner (may be null).
-	 * @param dialogFactory The factory function used to create the actual
-	 *        dialog object by invoking it with the constructed controller.
+	 * @param dialogFactory The factory function used to create the actual dialog object by invoking it with the
+	 *        constructed controller.
 	 * @param controllerClass The controller class to use.
-	 * @return The constructed controller which is bound to the newly created
-	 *         dialog.
+	 * @return The constructed controller which is bound to the newly created dialog.
 	 * @throws IOException if an I/O error occurs during dialog loading.
 	 */
 	public static <R, C extends DialogController<R>> C loadDialog(Window owner, Function<C, Dialog<R>> dialogFactory,
@@ -81,8 +82,7 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 	}
 
 	/**
-	 * This function is called during dialog initialization to initialize the
-	 * dialog's style.
+	 * This function is called during dialog initialization to initialize the dialog's style.
 	 * <p>
 	 * The default style is {@link StageStyle#DECORATED}.
 	 *
@@ -94,8 +94,7 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 	}
 
 	/**
-	 * This function is called during dialog initialization to initialize the
-	 * dialog's modality.
+	 * This function is called during dialog initialization to initialize the dialog's modality.
 	 * <p>
 	 * The default modality is {@link Modality#WINDOW_MODAL}.
 	 *
@@ -107,8 +106,7 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 	}
 
 	/**
-	 * This function is called during dialog initialization to perform the
-	 * actual dialog setup.
+	 * This function is called during dialog initialization to perform the actual dialog setup.
 	 *
 	 * @param dialog The dialog to setup.
 	 */
@@ -118,10 +116,9 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 
 	/**
 	 * Lookup a dialog button.
-	 * 
+	 *
 	 * @param buttonType The button type to look up.
-	 * @return The button node or {@code null} if the button type has not been
-	 *         created.
+	 * @return The button node or {@code null} if the button type has not been created.
 	 * @see DialogPane#lookupButton(ButtonType)
 	 */
 	protected final Node lookupButton(ButtonType buttonType) {
