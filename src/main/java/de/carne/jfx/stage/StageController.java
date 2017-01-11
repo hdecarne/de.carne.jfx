@@ -58,8 +58,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	/**
 	 * Get the {@link ScheduledExecutorService} shared by all stage controllers.
 	 *
-	 * @return The {@link ScheduledExecutorService} to use for background
-	 *         processing.
+	 * @return The {@link ScheduledExecutorService} to use for background processing.
 	 */
 	protected static ScheduledExecutorService getExecutorService() {
 		return EXECUTOR_SERVICE.get();
@@ -68,13 +67,13 @@ public abstract class StageController extends FXMLController<Stage> {
 	/**
 	 * Load the JavaFX application's primary stage.
 	 * <p>
-	 * This function is used to load and setup the JavaFX application's primary
-	 * stage as submitted to {@link Application#start(Stage)}.
+	 * This function is used to load and setup the JavaFX application's primary stage as submitted to
+	 * {@link Application#start(Stage)}.
 	 *
+	 * @param <C> The actual {@link StageController} type.
 	 * @param primaryStage The primary stage to setup.
 	 * @param controllerClass The controller class to use.
-	 * @return The constructed controller which is bound to the submitted
-	 *         primary stage.
+	 * @return The constructed controller which is bound to the submitted primary stage.
 	 * @throws IOException if an I/O error occurs during stage loading.
 	 */
 	public static <C extends StageController> C loadPrimaryStage(Stage primaryStage, Class<C> controllerClass)
@@ -90,9 +89,9 @@ public abstract class StageController extends FXMLController<Stage> {
 	 * <p>
 	 * The newly created stage is owned by the calling controller's stage.
 	 *
+	 * @param <C> The actual {@link StageController} type.
 	 * @param controllerClass The controller class to use.
-	 * @return The constructed controller which is bound to the newly created
-	 *         stage.
+	 * @return The constructed controller which is bound to the newly created stage.
 	 * @throws IOException if an I/O error occurs during stage loading.
 	 */
 	public <C extends StageController> C loadStage(Class<C> controllerClass) throws IOException {
@@ -126,11 +125,10 @@ public abstract class StageController extends FXMLController<Stage> {
 	 * <p>
 	 * The newly created dialog is owned by the calling controller's stage.
 	 *
-	 * @param dialogFactory The factory function used to create the actual
-	 *        dialog object by invoking it with the constructed controller.
+	 * @param dialogFactory The factory function used to create the actual dialog object by invoking it with the
+	 *        constructed controller.
 	 * @param controllerClass The controller class to use.
-	 * @return The constructed controller which is bound to the newly created
-	 *         dialog.
+	 * @return The constructed controller which is bound to the newly created dialog.
 	 * @throws IOException if an I/O error occurs during dialog loading.
 	 */
 	public <R, C extends DialogController<R>> C loadDialog(Function<C, Dialog<R>> dialogFactory,
@@ -143,8 +141,8 @@ public abstract class StageController extends FXMLController<Stage> {
 	/**
 	 * This function is called on root stages to determine the system menu bar.
 	 * <p>
-	 * This default implementation searches the stage scene's top level nodes
-	 * for a {@link MenuBar} node and if found, makes it the system's menu bar.
+	 * This default implementation searches the stage scene's top level nodes for a {@link MenuBar} node and if found,
+	 * makes it the system's menu bar.
 	 *
 	 * @see MenuBar#setUseSystemMenuBar(boolean)
 	 */
@@ -158,8 +156,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	}
 
 	/**
-	 * This function is called during stage initialization to determine the
-	 * stages's style.
+	 * This function is called during stage initialization to determine the stages's style.
 	 * <p>
 	 * The default style is {@link StageStyle#DECORATED}.
 	 *
@@ -171,8 +168,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	}
 
 	/**
-	 * This function is called during stage initialization to determine the
-	 * stages's modality.
+	 * This function is called during stage initialization to determine the stages's modality.
 	 * <p>
 	 * The default modality is {@link Modality#WINDOW_MODAL}.
 	 *
@@ -184,8 +180,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	}
 
 	/**
-	 * This function is called during stage initialization to determine whether
-	 * the stage is resizable.
+	 * This function is called during stage initialization to determine whether the stage is resizable.
 	 * <p>
 	 * The default is to make the stage resizable.
 	 *
@@ -196,8 +191,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	}
 
 	/**
-	 * This function is called during stage initialization to perform the actual
-	 * stage setup.
+	 * This function is called during stage initialization to perform the actual stage setup.
 	 *
 	 * @param stage The stage to setup.
 	 */
@@ -206,9 +200,8 @@ public abstract class StageController extends FXMLController<Stage> {
 	}
 
 	/**
-	 * This function is called to block/unblock this stage when either the first
-	 * background task has been scheduled or the last background task has been
-	 * finished.
+	 * This function is called to block/unblock this stage when either the first background task has been scheduled or
+	 * the last background task has been finished.
 	 *
 	 * @param blocked Whether the stage should blocked or unblocked.
 	 * @see BackgroundTask
@@ -220,8 +213,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	/**
 	 * Check whether this stage is currently blocked.
 	 * <p>
-	 * A stage is considered block when at least one unfinished background task
-	 * exists.
+	 * A stage is considered block when at least one unfinished background task exists.
 	 *
 	 * @return {@code true} if at least one unfinished background task exists.
 	 * @see BackgroundTask
@@ -233,11 +225,9 @@ public abstract class StageController extends FXMLController<Stage> {
 	/**
 	 * Get the {@link Preferences} object associated with this stage.
 	 * <p>
-	 * Override this function to associate a {@link Preferences} object with
-	 * this stage.
+	 * Override this function to associate a {@link Preferences} object with this stage.
 	 *
-	 * @return The {@link Preferences} object associated with this stage or
-	 *         {@code null} if there is none.
+	 * @return The {@link Preferences} object associated with this stage or {@code null} if there is none.
 	 */
 	protected Preferences getPreferences() {
 		return null;
@@ -270,8 +260,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	/**
 	 * Close the controller's stage.
 	 *
-	 * @param sync Flag to control whether associated data (preferences) should
-	 *        synced.
+	 * @param sync Flag to control whether associated data (preferences) should synced.
 	 * @see Stage#close()
 	 * @see #syncPreferences()
 	 */
