@@ -30,9 +30,9 @@ public final class Windows {
 	}
 
 	/**
-	 * Make sure a {@link Consumer} is invoked as soon as a corresponding
-	 * {@link Window} is about to get closed.
+	 * Make sure a {@link Consumer} is invoked as soon as a corresponding {@link Window} is about to get closed.
 	 *
+	 * @param <T> The actual consumer parameter type.
 	 * @param window The {@link Window} to monitor.
 	 * @param consumer The {@link Consumer} to invoke.
 	 * @param t The consumer parameter to use.

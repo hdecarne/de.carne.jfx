@@ -89,7 +89,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	 * <p>
 	 * The newly created stage is owned by the calling controller's stage.
 	 *
-	 * @param <C> The actual {@link StageController} type.
+	 * @param <C> The actual controller type.
 	 * @param controllerClass The controller class to use.
 	 * @return The constructed controller which is bound to the newly created stage.
 	 * @throws IOException if an I/O error occurs during stage loading.
@@ -125,6 +125,8 @@ public abstract class StageController extends FXMLController<Stage> {
 	 * <p>
 	 * The newly created dialog is owned by the calling controller's stage.
 	 *
+	 * @param <R> The actual dialog result type.
+	 * @param <C> The actual controller type.
 	 * @param dialogFactory The factory function used to create the actual dialog object by invoking it with the
 	 *        constructed controller.
 	 * @param controllerClass The controller class to use.

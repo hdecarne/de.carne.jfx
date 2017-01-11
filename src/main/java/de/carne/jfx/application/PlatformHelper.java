@@ -36,11 +36,9 @@ public final class PlatformHelper {
 	}
 
 	/**
-	 * Wrap a {@link Runnable} to make sure it is always invoked on the JavaFX
-	 * application thread.
+	 * Wrap a {@link Runnable} to make sure it is always invoked on the JavaFX application thread.
 	 *
-	 * @param runnable The {@link Runnable} to invoke on the JavaFX application
-	 *        thread.
+	 * @param runnable The {@link Runnable} to invoke on the JavaFX application thread.
 	 * @return The wrapped {@link Runnable}.
 	 */
 	public static Runnable runLaterRunnable(Runnable runnable) {
@@ -77,9 +75,9 @@ public final class PlatformHelper {
 	}
 
 	/**
-	 * Make sure a {@link Supplier} is always invoked on the JavaFX application
-	 * thread.
+	 * Make sure a {@link Supplier} is always invoked on the JavaFX application thread.
 	 *
+	 * @param <R> The actual result type.
 	 * @param supplier The supplier to invoke.
 	 * @return The supplier result.
 	 */
@@ -115,8 +113,7 @@ public final class PlatformHelper {
 	}
 
 	/**
-	 * Make sure a {@link Runnable} is always invoked on the JavaFX application
-	 * thread.
+	 * Make sure a {@link Runnable} is always invoked on the JavaFX application thread.
 	 *
 	 * @param runnable The runnable to invoke.
 	 */

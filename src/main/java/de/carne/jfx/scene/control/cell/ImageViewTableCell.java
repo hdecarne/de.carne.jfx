@@ -34,6 +34,7 @@ public class ImageViewTableCell<S> extends TableCell<S, Image> {
 	/**
 	 * Create a cell factory for use in a {@link TableColumn}.
 	 *
+	 * @param <T> The actual cell value type.
 	 * @return A cell factory for creating image based cells.
 	 */
 	public static <T> Callback<TableColumn<T, Image>, TableCell<T, Image>> forTableColumn() {
