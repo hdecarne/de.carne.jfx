@@ -1,27 +1,117 @@
+apply plugin: 'java'
 apply plugin: 'de.carne.gradleplugins.java'
+apply plugin: 'jacoco'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+	}
+	dependencies {
+		classpath("de.carne:gradleplugins:0.4.0")
+	}
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext.checkerFrameworkVersion = '2.1.7'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
 
 configurations {
-	generatedCompile {
-		description = 'compile generated sources'
+	checkerFrameworkAnnotatedJDK {
+		description = 'a copy of JDK classes with Checker Framework type qualifers inserted'
 	}
-}
-
-sourceSets {
-	// Add source directory for generated sources
-	generated {
-		java {
-			srcDir "${buildDir}/generated/main/java/"
-		}
+	checkerFramework {
+		description = 'The Checker Framework: custom pluggable types for Java'
 	}
-}
-
-jar {
-	// Include generated classes/resources in jar 
-	from sourceSets.generated.output
 }
 
 dependencies {
-	generatedCompile("org.checkerframework:checker-qual:${checkerFrameworkVersion}")
-	compile sourceSets.generated.output
-    compile project(':de.carne')
+    checkerFrameworkAnnotatedJDK("org.checkerframework:jdk8:${checkerFrameworkVersion}")
+	checkerFramework("org.checkerframework:checker:${checkerFrameworkVersion}")
+	compile("org.checkerframework:checker-qual:${checkerFrameworkVersion}")
+	
+	compile('de.carne:default:1')
+    
+	testCompile('junit:junit:4.12')
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+		xml.destination "${buildDir}/reports/jacoco/coverage.xml"
+		html.enabled true
+		html.destination "${buildDir}/reports/jacoco"
+		csv.enabled false
+	}
+}
+
+task javadocJar(type: Jar) {
+	classifier = 'javadoc'
+	from javadoc
+}
+
+task sourcesJar(type: Jar) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts {
+	archives javadocJar, sourcesJar
+}
+
+signing {
+	sign configurations.archives
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+				authentication(userName: ossrhUsername, password: ossrhPassword)
+			}
+
+			snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+				authentication(userName: ossrhUsername, password: ossrhPassword)
+			}
+
+			pom.project {
+				name project.name
+				packaging 'jar'
+				description projectDescription
+				url projectUrl
+
+				scm {
+					connection projectScm
+					developerConnection projectScm
+					url projectScmUrl
+				}
+
+				licenses {
+					license {
+						name projectLicense
+						url projectLicenseUrl
+						distribution 'repo'
+					}
+				}
+
+				developers {
+					developer {
+						id 'hdecarne'
+						name 'Holger de Carne'
+						email 'hdecarne@gmail.com'
+					}
+				}
+			}
+		}
+	}
 }
