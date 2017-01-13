@@ -41,6 +41,9 @@ dependencies {
 	compile('de.carne:default:1')
     
 	testCompile('junit:junit:4.12')
+	testCompile('org.testfx:testfx-core:4.0.5-alpha')
+	testCompile('org.testfx:testfx-junit:4.0.5-alpha')
+	testCompile('org.testfx:openjfx-monocle:8u20-b26')
 }
 
 jacocoTestReport {

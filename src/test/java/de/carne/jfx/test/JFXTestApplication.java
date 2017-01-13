@@ -16,22 +16,18 @@
  */
 package de.carne.jfx.test;
 
-import org.junit.Test;
-
-import de.carne.jfx.test.application.TestApplication;
+import de.carne.jfx.stage.StageController;
 import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
- * Test JFX application related code.
+ * Test application containing a UI utilizing all features to test.
  */
-public class ApplicationTest {
+public class JFXTestApplication extends Application {
 
-	/**
-	 * Test JFX application code by starting a test application.
-	 */
-	@Test
-	public void startStopApplication() {
-		Application.launch(TestApplication.class);
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		StageController.loadPrimaryStage(primaryStage, JFXTestController.class).show();
 	}
 
 }

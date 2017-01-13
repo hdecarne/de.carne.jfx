@@ -14,23 +14,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.jfx.test.application;
+package de.carne.jfx.test;
 
+import java.io.IOException;
+
+import de.carne.jfx.scene.control.Alerts;
+import de.carne.jfx.scene.control.aboutinfo.AboutInfoDialog;
 import de.carne.jfx.stage.StageController;
-import javafx.application.Application;
-import javafx.stage.Stage;
+import de.carne.jfx.stage.logview.LogViewController;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
 /**
- * Test application
+ * Test main window.
  */
-public class TestApplication extends Application {
+public class JFXTestController extends StageController {
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		Test1Controller test1 = StageController.loadPrimaryStage(primaryStage, Test1Controller.class);
+	@FXML
+	void onCmdClose(ActionEvent evt) {
+		close(true);
+	}
 
-		test1.show();
-		test1.close(true);
+	@FXML
+	void onCmdLogs(ActionEvent evt) {
+		try {
+			loadStage(LogViewController.class).show();
+		} catch (IOException e) {
+			Alerts.unexpected(e).showAndWait();
+		}
+	}
+
+	@FXML
+	void onCmdAbout(ActionEvent evt) {
+		try {
+			AboutInfoDialog.load(this).showAndWait();
+		} catch (IOException e) {
+			Alerts.unexpected(e).showAndWait();
+		}
 	}
 
 }
