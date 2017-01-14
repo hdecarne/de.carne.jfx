@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import de.carne.jfx.application.PlatformHelper;
 import de.carne.jfx.scene.control.Alerts;
 import de.carne.jfx.scene.control.cell.ImageViewTableCell;
@@ -75,7 +73,7 @@ public class LogViewController extends StageController {
 
 	private final ChangeListener<Boolean> toggleListener = (p, o, n) -> onToggled(n.booleanValue());
 
-	private @Nullable BooleanProperty toggleProperty = null;
+	private BooleanProperty toggleProperty = null;
 
 	@FXML
 	TableView<LogRecordModel> ctlLogRecords;
@@ -178,8 +176,7 @@ public class LogViewController extends StageController {
 	}
 
 	/**
-	 * Set a toggle property which is cleared when the log view closes and
-	 * which's toggling also closes the log view.
+	 * Set a toggle property which is cleared when the log view closes and which's toggling also closes the log view.
 	 *
 	 * @param toggleProperty The toggle property to set.
 	 * @return This log view for chaining.

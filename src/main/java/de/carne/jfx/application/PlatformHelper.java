@@ -152,7 +152,7 @@ public final class PlatformHelper {
 	 * @return The filtered icons.
 	 */
 	public static Image[] stageIcons(Image... icons) {
-		if (OS.IS_OSX) {
+		if (OS.IS_MACOS) {
 			return EMPTY_ICONS;
 		}
 		return icons;
@@ -165,7 +165,7 @@ public final class PlatformHelper {
 	 * @return The filtered icons.
 	 */
 	public static Collection<Image> stageIcons(Collection<Image> icons) {
-		if (OS.IS_OSX) {
+		if (OS.IS_MACOS) {
 			return Collections.emptyList();
 		}
 		return icons;

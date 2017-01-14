@@ -23,8 +23,6 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import de.carne.util.logging.Log;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -50,9 +48,9 @@ public abstract class FXMLController<U> {
 
 	private static final Pattern CONTROLLER_NAME_PATTERN = Pattern.compile("^(.*)\\.(.+)Controller$");
 
-	private @Nullable ResourceBundle resources = null;
+	private ResourceBundle resources = null;
 
-	private @Nullable U ui = null;
+	private U ui = null;
 
 	final void setResources(ResourceBundle resources) {
 		this.resources = resources;

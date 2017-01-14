@@ -16,8 +16,6 @@
  */
 package de.carne.jfx.scene.control;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import javafx.geometry.Point2D;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -53,7 +51,7 @@ public final class Tooltips {
 	 * @param image The image to display (may be {@code null}).
 	 * @return The created tool tip.
 	 */
-	public static Tooltip show(Region region, String message, @Nullable Image image) {
+	public static Tooltip show(Region region, String message, Image image) {
 		assert region != null;
 		assert message != null;
 

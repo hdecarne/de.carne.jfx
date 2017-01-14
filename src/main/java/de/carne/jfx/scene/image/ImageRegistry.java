@@ -21,14 +21,11 @@ import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import javafx.scene.image.Image;
 
 /**
- * Utility class providing a {@link NavigableMap} based data structure for
- * registering and retrieving {@link Image} objects depending on their key and
- * size.
+ * Utility class providing a {@link NavigableMap} based data structure for registering and retrieving {@link Image}
+ * objects depending on their key and size.
  *
  * @param <K> The key type to use.
  */
@@ -54,8 +51,8 @@ public final class ImageRegistry<K> {
 	 *
 	 * @param key The key to associate the image with.
 	 * @param image The image to register.
-	 * @return The previously registered image, or {@code null} if no image has
-	 *         yet been registered for the submitted key and image size.
+	 * @return The previously registered image, or {@code null} if no image has yet been registered for the submitted
+	 *         key and image size.
 	 */
 	public Image registerImage(K key, Image image) {
 		assert key != null;
@@ -67,12 +64,11 @@ public final class ImageRegistry<K> {
 	/**
 	 * Get the image associated with a specific key.
 	 * <p>
-	 * If multiple images with different sizes have been registered for the
-	 * submitted key, the largest image is returned.
+	 * If multiple images with different sizes have been registered for the submitted key, the largest image is
+	 * returned.
 	 *
 	 * @param key The key to get the image for.
-	 * @return The found image, or {@code null} if no image has yet been
-	 *         registered for the submitted key.
+	 * @return The found image, or {@code null} if no image has yet been registered for the submitted key.
 	 */
 	public Image getImage(K key) {
 		return getImage(key, 0.0, null);
@@ -81,14 +77,12 @@ public final class ImageRegistry<K> {
 	/**
 	 * Get the image associated with a specific key.
 	 * <p>
-	 * If multiple images with different sizes have been registered for the
-	 * submitted key, the largest image is returned.
+	 * If multiple images with different sizes have been registered for the submitted key, the largest image is
+	 * returned.
 	 *
 	 * @param key The key to get the image for.
-	 * @param def The default image to return in case no image has hat been
-	 *        registered for the submitted key.
-	 * @return The found image, or the default image if no image has yet been
-	 *         registered for the submitted key.
+	 * @param def The default image to return in case no image has hat been registered for the submitted key.
+	 * @return The found image, or the default image if no image has yet been registered for the submitted key.
 	 */
 	public Image getImage(K key, Image def) {
 		return getImage(key, 0.0, def);
@@ -99,8 +93,7 @@ public final class ImageRegistry<K> {
 	 *
 	 * @param key The key to get the image for.
 	 * @param size The size to match by the image.
-	 * @return The found image, or {@code null} if no image has yet been
-	 *         registered for the submitted key.
+	 * @return The found image, or {@code null} if no image has yet been registered for the submitted key.
 	 */
 	public Image getImage(K key, double size) {
 		return getImage(key, size, null);
@@ -111,10 +104,8 @@ public final class ImageRegistry<K> {
 	 *
 	 * @param key The key to get the image for.
 	 * @param size The size to match by the image.
-	 * @param def The default image to return in case no image has hat been
-	 *        registered for the submitted key.
-	 * @return The found image, or {@code null} if no image has yet been
-	 *         registered for the submitted key.
+	 * @param def The default image to return in case no image has hat been registered for the submitted key.
+	 * @return The found image, or {@code null} if no image has yet been registered for the submitted key.
 	 */
 	public Image getImage(K key, double size, Image def) {
 		assert key != null;
@@ -168,7 +159,7 @@ public final class ImageRegistry<K> {
 		}
 
 		@Override
-		public boolean equals(@Nullable Object obj) {
+		public boolean equals(Object obj) {
 			boolean equal = false;
 
 			if (this == obj) {

@@ -16,8 +16,6 @@
  */
 package de.carne.jfx.scene.control;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -30,7 +28,7 @@ import javafx.scene.control.ListView;
  */
 public abstract class ListViewEditor<T> {
 
-	private @Nullable ListView<T> listView = null;
+	private ListView<T> listView = null;
 
 	/**
 	 * Initialize the editor.
@@ -120,14 +118,14 @@ public abstract class ListViewEditor<T> {
 	 *
 	 * @return The entered list element or {@code null} if the current input is empty or not valid.
 	 */
-	protected abstract @Nullable T getInput();
+	protected abstract T getInput();
 
 	/**
 	 * Called on selection change to initialize the input data with the current selection.
 	 *
 	 * @param input The selected list element's data or {@code null} if nothing is selected.
 	 */
-	protected abstract void setInput(@Nullable T input);
+	protected abstract void setInput(T input);
 
 	/**
 	 * Add action handler.

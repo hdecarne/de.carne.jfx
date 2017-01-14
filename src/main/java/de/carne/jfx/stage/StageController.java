@@ -24,6 +24,7 @@ import java.util.function.Function;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import de.carne.VM;
 import de.carne.jfx.fxml.FXMLController;
 import de.carne.jfx.scene.control.DialogController;
 import de.carne.util.ObjectHolder;
@@ -149,10 +150,13 @@ public abstract class StageController extends FXMLController<Stage> {
 	 * @see MenuBar#setUseSystemMenuBar(boolean)
 	 */
 	protected void setSystemMenuBar() {
-		for (Node node : getUI().getScene().getRoot().getChildrenUnmodifiable()) {
-			if (node instanceof MenuBar) {
-				((MenuBar) node).setUseSystemMenuBar(true);
-				break;
+		// Do not use system menu bar in test mode as this may break the UI test robot.
+		if (!VM.testModeEnabled) {
+			for (Node node : getUI().getScene().getRoot().getChildrenUnmodifiable()) {
+				if (node instanceof MenuBar) {
+					((MenuBar) node).setUseSystemMenuBar(true);
+					break;
+				}
 			}
 		}
 	}
