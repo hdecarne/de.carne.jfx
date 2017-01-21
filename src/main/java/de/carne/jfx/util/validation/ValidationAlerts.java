@@ -32,15 +32,13 @@ public final class ValidationAlerts {
 	}
 
 	/**
-	 * Creates an {@link Alert} of type {@link AlertType#ERROR} and set it up
-	 * using the submitted {@link ValidationException}.
+	 * Creates an {@link Alert} of type {@link AlertType#ERROR} and set it up using the submitted
+	 * {@link ValidationException}.
 	 *
 	 * @param e The {@link ValidationException} providing the alert details.
 	 * @return The created alert.
 	 */
 	public static Alert error(ValidationException e) {
-		assert e != null;
-
 		Alert alert = new Alert(AlertType.ERROR, e.getLocalizedMessage(), ButtonType.OK);
 
 		alert.setHeaderText(ValidationAlertsI18N.formatSTR_MESSAGE_VALIDATION_ERROR());

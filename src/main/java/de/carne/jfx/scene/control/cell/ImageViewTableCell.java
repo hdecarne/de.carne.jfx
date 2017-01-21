@@ -16,6 +16,7 @@
  */
 package de.carne.jfx.scene.control.cell;
 
+import de.carne.check.Nullable;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
@@ -38,18 +39,11 @@ public class ImageViewTableCell<S> extends TableCell<S, Image> {
 	 * @return A cell factory for creating image based cells.
 	 */
 	public static <T> Callback<TableColumn<T, Image>, TableCell<T, Image>> forTableColumn() {
-		return new Callback<TableColumn<T, Image>, TableCell<T, Image>>() {
-
-			@Override
-			public TableCell<T, Image> call(TableColumn<T, Image> col) {
-				return new ImageViewTableCell<>();
-			}
-
-		};
+		return (@Nullable TableColumn<T, Image> col) -> new ImageViewTableCell<>();
 	}
 
 	@Override
-	protected void updateItem(Image item, boolean empty) {
+	protected void updateItem(@Nullable Image item, boolean empty) {
 		if (empty) {
 			setGraphic(null);
 		} else {

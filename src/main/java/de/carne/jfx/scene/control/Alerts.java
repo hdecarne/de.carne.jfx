@@ -19,6 +19,7 @@ package de.carne.jfx.scene.control;
 import java.util.Collection;
 import java.util.logging.LogRecord;
 
+import de.carne.check.Nullable;
 import de.carne.util.logging.Log;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -38,8 +39,7 @@ public final class Alerts {
 	/**
 	 * Create an unexpected error {@link Alert} of type {@link AlertType#ERROR}.
 	 *
-	 * @param throwable The optional {@link Throwable} providing the alert
-	 *        details.
+	 * @param throwable The optional {@link Throwable} providing the alert details.
 	 * @return The created alert.
 	 */
 	public static Alert unexpected(Throwable throwable) {
@@ -47,19 +47,14 @@ public final class Alerts {
 	}
 
 	/**
-	 * Create an application error message {@link Alert} with {@link Throwable}
-	 * details.
+	 * Create an application error message {@link Alert} with {@link Throwable} details.
 	 *
 	 * @param type The alert type to create.
 	 * @param message The error message to display.
-	 * @param throwable The optional {@link Throwable} providing the alert
-	 *        details.
+	 * @param throwable The optional {@link Throwable} providing the alert details.
 	 * @return The created alert.
 	 */
 	public static Alert error(AlertType type, String message, Throwable throwable) {
-		assert type != null;
-		assert message != null;
-
 		logAlertMessage(type, message, throwable);
 
 		Alert alert = new Alert(type, message, ButtonType.OK);
@@ -70,33 +65,25 @@ public final class Alerts {
 
 	/**
 	 * Create a generic application message {@link Alert}.
-	 * 
+	 *
 	 * @param type The alert type to create.
 	 * @param message The message to display.
 	 * @param buttons The buttons to display.
 	 * @return The created alert.
 	 */
 	public static Alert message(AlertType type, String message, ButtonType... buttons) {
-		assert type != null;
-		assert message != null;
-
-		Alert alert = new Alert(type, message, buttons);
-		return alert;
+		return new Alert(type, message, buttons);
 	}
 
 	/**
-	 * Create an application error message {@link Alert} with {@link LogRecord}
-	 * details.
+	 * Create an application error message {@link Alert} with {@link LogRecord} details.
 	 *
 	 * @param type The alert type to create.
 	 * @param message The error message to display.
-	 * @param logs The optional collection of {@link LogRecord}s providing the
-	 *        alert details.
+	 * @param logs The optional collection of {@link LogRecord}s providing the alert details.
 	 * @return The created alert.
 	 */
 	public static Alert logs(AlertType type, String message, Collection<LogRecord> logs) {
-		assert message != null;
-
 		logAlertMessage(type, message, null);
 
 		Alert alert = new Alert(type, message, ButtonType.OK);
@@ -105,7 +92,7 @@ public final class Alerts {
 		return DialogHelper.setLogRecordsContent(alert, logs);
 	}
 
-	private static void logAlertMessage(AlertType type, String message, Throwable throwable) {
+	private static void logAlertMessage(AlertType type, String message, @Nullable Throwable throwable) {
 		if (AlertType.ERROR.equals(type)) {
 			LOG.error(throwable, message);
 		} else if (AlertType.WARNING.equals(type)) {

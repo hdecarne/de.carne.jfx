@@ -14,32 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+@NonNullByDefault
 package de.carne.jfx.scene.control.aboutinfo;
 
-import java.io.IOException;
-
-import de.carne.jfx.stage.StageController;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-
-/**
- * About info dialog.
- */
-public class AboutInfoDialog extends Dialog<ButtonType> {
-
-	private AboutInfoDialog() {
-		// Make sure this class is not instantiated from outside
-	}
-
-	/**
-	 * Load the about info dialog.
-	 *
-	 * @param owner The stage controller owning this dialog.
-	 * @return The constructed controller which is bound to the newly created dialog.
-	 * @throws IOException if an I/O error occurs during dialog loading.
-	 */
-	public static AboutInfoController load(StageController owner) throws IOException {
-		return owner.loadDialog((c) -> new AboutInfoDialog(), AboutInfoController.class);
-	}
-
-}
+import de.carne.check.NonNullByDefault;

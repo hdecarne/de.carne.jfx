@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.function.Function;
 
+import de.carne.check.Nullable;
 import de.carne.jfx.fxml.FXMLController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -64,10 +65,7 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 	}
 
 	@Override
-	protected void setupUI(Window owner, Dialog<R> dialog, Parent fxmlRoot) {
-		assert dialog != null;
-		assert fxmlRoot != null;
-
+	protected void setupUI(@Nullable Window owner, Dialog<R> dialog, Parent fxmlRoot) {
 		if (!(fxmlRoot instanceof DialogPane)) {
 			throw new IllegalArgumentException(
 					"FXML root must be of type DialogPane; but is: " + fxmlRoot.getClass().getName());
@@ -122,8 +120,6 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 	 * @see DialogPane#lookupButton(ButtonType)
 	 */
 	protected final Node lookupButton(ButtonType buttonType) {
-		assert buttonType != null;
-
 		return getUI().getDialogPane().lookupButton(buttonType);
 	}
 
@@ -134,9 +130,6 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 	 * @param filter The filter to register.
 	 */
 	protected final void addButtonEventFilter(ButtonType buttonType, EventHandler<? super ActionEvent> filter) {
-		assert buttonType != null;
-		assert filter != null;
-
 		getUI().getDialogPane().lookupButton(buttonType).addEventFilter(ActionEvent.ACTION, filter);
 	}
 

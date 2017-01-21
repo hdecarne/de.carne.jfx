@@ -18,6 +18,7 @@ package de.carne.jfx.util;
 
 import java.util.Arrays;
 
+import de.carne.check.Check;
 import de.carne.util.Strings;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -34,10 +35,8 @@ public final class FileChooserHelper {
 	/**
 	 * Create an {@link ExtensionFilter} object from a {@link String}.
 	 * <p>
-	 * The submitted string has to contain at least two tokens separated by the
-	 * '|' symbol. The first token is used as the filter's description. All
-	 * following tokens are used as filter extensions (e.g. "Binary
-	 * data|*.bin|*.dat").
+	 * The submitted string has to contain at least two tokens separated by the '|' symbol. The first token is used as
+	 * the filter's description. All following tokens are used as filter extensions (e.g. "Binary data|*.bin|*.dat").
 	 *
 	 * @param str The {@link String} to use for filter creation.
 	 * @return The created {@link ExtensionFilter} object.
@@ -45,7 +44,7 @@ public final class FileChooserHelper {
 	public static ExtensionFilter filterFromString(String str) {
 		String[] tokens = Strings.split(str, "|");
 
-		assert tokens.length >= 2;
+		Check.condition(tokens.length >= 2);
 
 		return new ExtensionFilter(tokens[0], Arrays.copyOfRange(tokens, 1, tokens.length));
 	}

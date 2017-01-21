@@ -19,6 +19,7 @@ package de.carne.jfx.scene.control;
 import java.util.Collection;
 import java.util.logging.LogRecord;
 
+import de.carne.check.Nullable;
 import de.carne.jfx.stage.logview.LogViewFormats;
 import de.carne.jfx.stage.logview.LogViewImages;
 import de.carne.util.Exceptions;
@@ -30,7 +31,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Callback;
 
 /**
  * Utility class providing {@link DialogPane} related functions.
@@ -44,16 +44,13 @@ public final class DialogPaneHelper {
 	private static final double IMAGE_SIZE16 = 16.0;
 
 	/**
-	 * Add an {@link Exception}'s stack trace to a {@link DialogPane} as an
-	 * expandable content.
+	 * Add an {@link Exception}'s stack trace to a {@link DialogPane} as an expandable content.
 	 *
 	 * @param dialogPane The dialog pane to add the exception to.
 	 * @param exception The exception to add (may be {@code null}).
 	 * @see DialogPane#setExpandableContent(javafx.scene.Node)
 	 */
-	public static void setExceptionContent(DialogPane dialogPane, Throwable exception) {
-		assert dialogPane != null;
-
+	public static void setExceptionContent(DialogPane dialogPane, @Nullable Throwable exception) {
 		if (exception != null) {
 			TextArea traceView = new TextArea(Exceptions.getStackTrace(exception));
 
@@ -71,40 +68,30 @@ public final class DialogPaneHelper {
 	}
 
 	/**
-	 * Add a {@link LogRecord} list view to a {@link DialogPane} as an
-	 * expandable content.
+	 * Add a {@link LogRecord} list view to a {@link DialogPane} as an expandable content.
 	 *
 	 * @param dialogPane The dialog pane to add the log records to.
 	 * @param logRecords The log records to add (may be {@code null}).
 	 * @see DialogPane#setExpandableContent(javafx.scene.Node)
 	 */
-	public static void setLogRecordsContent(DialogPane dialogPane, Collection<LogRecord> logRecords) {
-		assert dialogPane != null;
-
+	public static void setLogRecordsContent(DialogPane dialogPane, @Nullable Collection<LogRecord> logRecords) {
 		if (logRecords != null && !logRecords.isEmpty()) {
 			ListView<LogRecord> logView = new ListView<>(FXCollections.observableArrayList(logRecords));
 
-			logView.setCellFactory(new Callback<ListView<LogRecord>, ListCell<LogRecord>>() {
+			logView.setCellFactory(param -> new ListCell<LogRecord>() {
 
 				@Override
-				public ListCell<LogRecord> call(ListView<LogRecord> param) {
-					return new ListCell<LogRecord>() {
+				protected void updateItem(@Nullable LogRecord item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item != null) {
+						setText(LogViewFormats.MESSAGE_FORMAT.format(item));
 
-						@Override
-						protected void updateItem(LogRecord item, boolean empty) {
-							super.updateItem(item, empty);
-							if (item != null) {
-								setText(LogViewFormats.MESSAGE_FORMAT.format(item));
+						Image itemImage = LogViewImages.LEVEL_IMAGES.getImage(item.getLevel(), IMAGE_SIZE16);
 
-								Image itemImage = LogViewImages.LEVEL_IMAGES.getImage(item.getLevel(), IMAGE_SIZE16);
-
-								if (itemImage != null) {
-									setGraphic(new ImageView(itemImage));
-								}
-							}
+						if (itemImage != null) {
+							setGraphic(new ImageView(itemImage));
 						}
-
-					};
+					}
 				}
 
 			});

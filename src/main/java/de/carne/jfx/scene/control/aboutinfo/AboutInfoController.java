@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import de.carne.check.Nullable;
 import de.carne.jfx.scene.control.DialogController;
 import de.carne.util.AboutInfo;
 import de.carne.util.Exceptions;
@@ -39,8 +40,9 @@ import javafx.scene.layout.AnchorPane;
  */
 public class AboutInfoController extends DialogController<ButtonType> {
 
+	@SuppressWarnings("null")
 	@FXML
-	TabPane ctlInfoTabs;
+	private TabPane ctlInfoTabs;
 
 	@Override
 	protected void setupDialog(Dialog<ButtonType> dialog) {
@@ -52,12 +54,10 @@ public class AboutInfoController extends DialogController<ButtonType> {
 	/**
 	 * Set the application logo.
 	 *
-	 * @param image The logog image to display.
+	 * @param image The logo image to display.
 	 * @return This controller.
 	 */
 	public AboutInfoController setLogo(Image image) {
-		assert image != null;
-
 		getUI().setGraphic(new ImageView(image));
 		return this;
 	}
@@ -65,16 +65,15 @@ public class AboutInfoController extends DialogController<ButtonType> {
 	/**
 	 * Add an info message to the dialog.
 	 * <p>
-	 * The first line of the submitted text resource is used as a title. The
-	 * remaining lines are displayed as a single text.
+	 * The first line of the submitted text resource is used as a title. The remaining lines are displayed as a single
+	 * text.
 	 * <p>
-	 * If the submitted URL is {@code null} or cannot be read, no info message
-	 * is added to the dialog.
+	 * If the submitted URL is {@code null} or cannot be read, no info message is added to the dialog.
 	 *
 	 * @param url The URL of the text resource to add.
 	 * @return This controller.
 	 */
-	public AboutInfoController addInfo(URL url) {
+	public AboutInfoController addInfo(@Nullable URL url) {
 		if (url != null) {
 			try (BufferedReader infoReader = new BufferedReader(new InputStreamReader(url.openStream()))) {
 				String infoTitle = infoReader.readLine();

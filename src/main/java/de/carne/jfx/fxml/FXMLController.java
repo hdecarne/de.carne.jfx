@@ -23,6 +23,8 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.carne.check.Check;
+import de.carne.check.Nullable;
 import de.carne.util.logging.Log;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -48,8 +50,10 @@ public abstract class FXMLController<U> {
 
 	private static final Pattern CONTROLLER_NAME_PATTERN = Pattern.compile("^(.*)\\.(.+)Controller$");
 
+	@Nullable
 	private ResourceBundle resources = null;
 
+	@Nullable
 	private U ui = null;
 
 	final void setResources(ResourceBundle resources) {
@@ -62,7 +66,7 @@ public abstract class FXMLController<U> {
 	 * @return The UI resource bundle.
 	 */
 	protected final ResourceBundle getResources() {
-		return this.resources;
+		return Check.nonNull(this.resources);
 	}
 
 	final void setUI(U ui) {
@@ -75,7 +79,7 @@ public abstract class FXMLController<U> {
 	 * @return The UI object.
 	 */
 	public final U getUI() {
-		return this.ui;
+		return Check.nonNull(this.ui);
 	}
 
 	/**
@@ -98,7 +102,7 @@ public abstract class FXMLController<U> {
 	 * @return The constructed controller which is bound to the constructed scene and UI object.
 	 * @throws IOException if an I/O error occurs during stage setup.
 	 */
-	protected static <U, C extends FXMLController<U>> C loadUI(Window owner, Function<C, U> uiFactory,
+	protected static <U, C extends FXMLController<U>> C loadUI(@Nullable Window owner, Function<C, U> uiFactory,
 			Class<C> controllerClass) throws IOException {
 
 		String controllerName = controllerClass.getName();
@@ -137,6 +141,6 @@ public abstract class FXMLController<U> {
 	 * @param ui The constructed UI object.
 	 * @param fxmlRoot The scene's root node as defined by the FXML resource.
 	 */
-	protected abstract void setupUI(Window owner, U ui, Parent fxmlRoot);
+	protected abstract void setupUI(@Nullable Window owner, U ui, Parent fxmlRoot);
 
 }

@@ -24,7 +24,9 @@ import java.util.function.Function;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import de.carne.ApplicationShutdownTask;
 import de.carne.VM;
+import de.carne.check.Nullable;
 import de.carne.jfx.fxml.FXMLController;
 import de.carne.jfx.scene.control.DialogController;
 import de.carne.util.ObjectHolder;
@@ -54,6 +56,14 @@ public abstract class StageController extends FXMLController<Stage> {
 	private static final ObjectHolder<ScheduledExecutorService> EXECUTOR_SERVICE = new ObjectHolder<>(
 			() -> Executors.newSingleThreadScheduledExecutor());
 
+	static {
+		ApplicationShutdownTask.register(StageController.class.getSimpleName(), () -> {
+			if (EXECUTOR_SERVICE.isSet()) {
+				EXECUTOR_SERVICE.get().shutdown();
+			}
+		});
+	}
+
 	private final AtomicInteger backgroundTaskCount = new AtomicInteger(0);
 
 	/**
@@ -79,9 +89,6 @@ public abstract class StageController extends FXMLController<Stage> {
 	 */
 	public static <C extends StageController> C loadPrimaryStage(Stage primaryStage, Class<C> controllerClass)
 			throws IOException {
-		assert primaryStage != null;
-		assert controllerClass != null;
-
 		return loadUI(null, (c) -> primaryStage, controllerClass);
 	}
 
@@ -96,8 +103,6 @@ public abstract class StageController extends FXMLController<Stage> {
 	 * @throws IOException if an I/O error occurs during stage loading.
 	 */
 	public <C extends StageController> C loadStage(Class<C> controllerClass) throws IOException {
-		assert controllerClass != null;
-
 		return loadUI(getUI(), (c) -> new Stage(), controllerClass);
 	}
 
@@ -107,7 +112,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	}
 
 	@Override
-	protected void setupUI(Window owner, Stage stage, Parent fxmlRoot) {
+	protected void setupUI(@Nullable Window owner, Stage stage, Parent fxmlRoot) {
 		stage.setOnCloseRequest((evt) -> onCloseRequest(evt));
 		stage.setScene(new Scene(fxmlRoot));
 		stage.initStyle(getStyle());
@@ -136,8 +141,6 @@ public abstract class StageController extends FXMLController<Stage> {
 	 */
 	public <R, C extends DialogController<R>> C loadDialog(Function<C, Dialog<R>> dialogFactory,
 			Class<C> controllerClass) throws IOException {
-		assert controllerClass != null;
-
 		return DialogController.loadDialog(getUI(), dialogFactory, controllerClass);
 	}
 
@@ -151,7 +154,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	 */
 	protected void setSystemMenuBar() {
 		// Do not use system menu bar in test mode as this may break the UI test robot.
-		if (!VM.testModeEnabled) {
+		if (!VM.TEST_MODE_ENABLED) {
 			for (Node node : getUI().getScene().getRoot().getChildrenUnmodifiable()) {
 				if (node instanceof MenuBar) {
 					((MenuBar) node).setUseSystemMenuBar(true);
@@ -235,6 +238,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	 *
 	 * @return The {@link Preferences} object associated with this stage or {@code null} if there is none.
 	 */
+	@Nullable
 	protected Preferences getPreferences() {
 		return null;
 	}

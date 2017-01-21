@@ -17,6 +17,7 @@
 package de.carne.jfx.test;
 
 import java.io.IOException;
+import java.net.URL;
 
 import de.carne.jfx.scene.control.Alerts;
 import de.carne.jfx.scene.control.aboutinfo.AboutInfoDialog;
@@ -24,19 +25,22 @@ import de.carne.jfx.stage.StageController;
 import de.carne.jfx.stage.logview.LogViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 
 /**
  * Test main window.
  */
 public class JFXTestController extends StageController {
 
+	@SuppressWarnings("unused")
 	@FXML
-	void onCmdClose(ActionEvent evt) {
+	private void onCmdClose(ActionEvent evt) {
 		close(true);
 	}
 
+	@SuppressWarnings("unused")
 	@FXML
-	void onCmdLogs(ActionEvent evt) {
+	private void onCmdLogs(ActionEvent evt) {
 		try {
 			loadStage(LogViewController.class).show();
 		} catch (IOException e) {
@@ -44,10 +48,14 @@ public class JFXTestController extends StageController {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	@FXML
-	void onCmdAbout(ActionEvent evt) {
+	private void onCmdAbout(ActionEvent evt) {
 		try {
-			AboutInfoDialog.load(this).showAndWait();
+			Image logo = new Image(getClass().getResource("logo.png").toExternalForm());
+			URL info = getClass().getResource("info.txt");
+
+			AboutInfoDialog.load(this).setLogo(logo).addInfo(info).showAndWait();
 		} catch (IOException e) {
 			Alerts.unexpected(e).showAndWait();
 		}

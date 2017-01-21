@@ -42,8 +42,6 @@ public class DialogHelper {
 	 * @see DialogPane#setExpandableContent(javafx.scene.Node)
 	 */
 	public static <R, T extends Dialog<R>> T setExceptionContent(T dialog, Throwable throwable) {
-		assert dialog != null;
-
 		DialogPaneHelper.setExceptionContent(dialog.getDialogPane(), throwable);
 		return dialog;
 	}
@@ -59,8 +57,6 @@ public class DialogHelper {
 	 * @see DialogPane#setExpandableContent(javafx.scene.Node)
 	 */
 	public static <R, T extends Dialog<R>> T setLogRecordsContent(T dialog, Collection<LogRecord> logs) {
-		assert dialog != null;
-
 		DialogPaneHelper.setLogRecordsContent(dialog.getDialogPane(), logs);
 		return dialog;
 	}

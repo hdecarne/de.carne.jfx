@@ -16,6 +16,8 @@
  */
 package de.carne.jfx.scene.control;
 
+import de.carne.check.Check;
+import de.carne.check.Nullable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -28,19 +30,18 @@ import javafx.scene.control.ListView;
  */
 public abstract class ListViewEditor<T> {
 
-	private ListView<T> listView = null;
+	@Nullable
+	private ListView<T> listViewInitialized = null;
 
 	/**
 	 * Initialize the editor.
 	 *
-	 * @param listViewParam The {@link ListView} control to use for editing.
+	 * @param listView The {@link ListView} control to use for editing.
 	 * @return This editor.
 	 */
-	public ListViewEditor<T> init(ListView<T> listViewParam) {
-		assert listViewParam != null;
-
-		this.listView = listViewParam;
-		this.listView.getSelectionModel().selectedItemProperty().addListener((p, o, n) -> setInput(n));
+	public ListViewEditor<T> init(ListView<T> listView) {
+		this.listViewInitialized = listView;
+		this.listViewInitialized.getSelectionModel().selectedItemProperty().addListener((p, o, n) -> setInput(n));
 		return this;
 	}
 
@@ -51,8 +52,6 @@ public abstract class ListViewEditor<T> {
 	 * @return This editor.
 	 */
 	public ListViewEditor<T> setAddCommand(Button cmdButton) {
-		assert cmdButton != null;
-
 		cmdButton.setOnAction((evt) -> onAddAction(evt));
 		return this;
 	}
@@ -64,9 +63,9 @@ public abstract class ListViewEditor<T> {
 	 * @return This editor.
 	 */
 	public ListViewEditor<T> setApplyCommand(Button cmdButton) {
-		assert cmdButton != null;
+		ListView<T> listView = getListView();
 
-		cmdButton.disableProperty().bind(this.listView.getSelectionModel().selectedItemProperty().isNull());
+		cmdButton.disableProperty().bind(listView.getSelectionModel().selectedItemProperty().isNull());
 		cmdButton.setOnAction((evt) -> onApplyAction(evt));
 		return this;
 	}
@@ -78,9 +77,9 @@ public abstract class ListViewEditor<T> {
 	 * @return This editor.
 	 */
 	public ListViewEditor<T> setDeleteCommand(Button cmdButton) {
-		assert cmdButton != null;
+		ListView<T> listView = getListView();
 
-		cmdButton.disableProperty().bind(this.listView.getSelectionModel().selectedItemProperty().isNull());
+		cmdButton.disableProperty().bind(listView.getSelectionModel().selectedItemProperty().isNull());
 		cmdButton.setOnAction((evt) -> onDeleteAction(evt));
 		return this;
 	}
@@ -92,9 +91,9 @@ public abstract class ListViewEditor<T> {
 	 * @return This editor.
 	 */
 	public ListViewEditor<T> setMoveUpCommand(Button cmdButton) {
-		assert cmdButton != null;
+		ListView<T> listView = getListView();
 
-		cmdButton.disableProperty().bind(this.listView.getSelectionModel().selectedItemProperty().isNull());
+		cmdButton.disableProperty().bind(listView.getSelectionModel().selectedItemProperty().isNull());
 		cmdButton.setOnAction((evt) -> onMoveUpAction(evt));
 		return this;
 	}
@@ -106,9 +105,9 @@ public abstract class ListViewEditor<T> {
 	 * @return This editor.
 	 */
 	public ListViewEditor<T> setMoveDownCommand(Button cmdButton) {
-		assert cmdButton != null;
+		ListView<T> listView = getListView();
 
-		cmdButton.disableProperty().bind(this.listView.getSelectionModel().selectedItemProperty().isNull());
+		cmdButton.disableProperty().bind(listView.getSelectionModel().selectedItemProperty().isNull());
 		cmdButton.setOnAction((evt) -> onMoveDownAction(evt));
 		return this;
 	}
@@ -136,10 +135,12 @@ public abstract class ListViewEditor<T> {
 		T input = getInput();
 
 		if (input != null) {
-			int addIndex = Math.max(0, this.listView.getSelectionModel().getSelectedIndex() + 1);
+			ListView<T> listView = getListView();
 
-			this.listView.getItems().add(addIndex, input);
-			this.listView.getSelectionModel().select(addIndex);
+			int addIndex = Math.max(0, listView.getSelectionModel().getSelectedIndex() + 1);
+
+			listView.getItems().add(addIndex, input);
+			listView.getSelectionModel().select(addIndex);
 		}
 	}
 
@@ -149,13 +150,14 @@ public abstract class ListViewEditor<T> {
 	 * @param evt The action event.
 	 */
 	public void onApplyAction(ActionEvent evt) {
-		int applyIndex = this.listView.getSelectionModel().getSelectedIndex();
+		ListView<T> listView = getListView();
+		int applyIndex = listView.getSelectionModel().getSelectedIndex();
 
 		if (applyIndex >= 0) {
 			T input = getInput();
 
 			if (input != null) {
-				this.listView.getItems().set(applyIndex, input);
+				listView.getItems().set(applyIndex, input);
 			}
 		}
 	}
@@ -166,10 +168,11 @@ public abstract class ListViewEditor<T> {
 	 * @param evt The action event.
 	 */
 	public void onDeleteAction(ActionEvent evt) {
-		int deleteIndex = this.listView.getSelectionModel().getSelectedIndex();
+		ListView<T> listView = getListView();
+		int deleteIndex = listView.getSelectionModel().getSelectedIndex();
 
 		if (deleteIndex >= 0) {
-			this.listView.getItems().remove(deleteIndex);
+			listView.getItems().remove(deleteIndex);
 		}
 	}
 
@@ -179,16 +182,17 @@ public abstract class ListViewEditor<T> {
 	 * @param evt The action event.
 	 */
 	public void onMoveUpAction(ActionEvent evt) {
-		int moveFromIndex = this.listView.getSelectionModel().getSelectedIndex();
+		ListView<T> listView = getListView();
+		int moveFromIndex = listView.getSelectionModel().getSelectedIndex();
 
 		if (moveFromIndex > 0) {
-			ObservableList<T> items = this.listView.getItems();
+			ObservableList<T> items = listView.getItems();
 			T item = items.get(moveFromIndex);
 			int moveToIndex = moveFromIndex - 1;
 
 			items.set(moveFromIndex, items.get(moveToIndex));
 			items.set(moveToIndex, item);
-			this.listView.getSelectionModel().select(moveToIndex);
+			listView.getSelectionModel().select(moveToIndex);
 		}
 	}
 
@@ -198,17 +202,22 @@ public abstract class ListViewEditor<T> {
 	 * @param evt The action event.
 	 */
 	public void onMoveDownAction(ActionEvent evt) {
-		int moveFromIndex = this.listView.getSelectionModel().getSelectedIndex();
+		ListView<T> listView = getListView();
+		int moveFromIndex = listView.getSelectionModel().getSelectedIndex();
 		int moveToIndex = moveFromIndex + 1;
-		ObservableList<T> items = this.listView.getItems();
+		ObservableList<T> items = listView.getItems();
 
 		if (moveToIndex < items.size()) {
 			T item = items.get(moveFromIndex);
 
 			items.set(moveFromIndex, items.get(moveToIndex));
 			items.set(moveToIndex, item);
-			this.listView.getSelectionModel().select(moveToIndex);
+			listView.getSelectionModel().select(moveToIndex);
 		}
+	}
+
+	private ListView<T> getListView() {
+		return Check.nonNull(this.listViewInitialized, "not initialized");
 	}
 
 }

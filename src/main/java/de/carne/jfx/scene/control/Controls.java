@@ -44,7 +44,7 @@ public final class Controls {
 		ObservableList<T> options = control.getItems();
 
 		options.clear();
-		if (defaultSet != null && !defaultSet.isEmpty()) {
+		if (!defaultSet.isEmpty()) {
 			options.addAll(defaultSet);
 			options.sort(comparator);
 			control.setValue(defaultSet.getDefault());

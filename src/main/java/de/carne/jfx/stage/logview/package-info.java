@@ -14,39 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+@NonNullByDefault
 package de.carne.jfx.stage.logview;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.logging.Formatter;
-import java.util.logging.LogRecord;
-
-import de.carne.check.Nullable;
-
-/**
- * Utility class used to define the text formats used to display log messages in the UI.
- */
-public final class LogViewFormats {
-
-	private LogViewFormats() {
-		// Make sure this class is not instantiated from outside
-	}
-
-	/**
-	 * {@code Formatter} for log message formatting.
-	 */
-	public static final Formatter MESSAGE_FORMAT = new Formatter() {
-
-		@Override
-		public String format(@Nullable LogRecord record) {
-			return formatMessage(record);
-		}
-
-	};
-
-	/**
-	 * {@link DateFormat} for log time formatting.
-	 */
-	public static final DateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm:ss,SSS");
-
-}
+import de.carne.check.NonNullByDefault;

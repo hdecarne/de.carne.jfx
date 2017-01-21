@@ -39,9 +39,6 @@ public final class Windows {
 	 * @return The submitted consumer parameter.
 	 */
 	public static <T> T onHiding(Window window, Consumer<T> consumer, T t) {
-		assert window != null;
-		assert consumer != null;
-
 		window.onHidingProperty().addListener((p, o, n) -> consumer.accept(t));
 		return t;
 	}

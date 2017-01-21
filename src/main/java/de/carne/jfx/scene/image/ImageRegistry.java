@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
+import de.carne.check.Check;
+import de.carne.check.Nullable;
 import javafx.scene.image.Image;
 
 /**
@@ -41,8 +43,6 @@ public final class ImageRegistry<K> {
 	 * @param comparator The {@link Comparator} to use for key comparison.
 	 */
 	public ImageRegistry(Comparator<K> comparator) {
-		assert comparator != null;
-
 		this.comparator = comparator;
 	}
 
@@ -55,9 +55,6 @@ public final class ImageRegistry<K> {
 	 *         key and image size.
 	 */
 	public Image registerImage(K key, Image image) {
-		assert key != null;
-		assert image != null;
-
 		return this.imageMap.put(new CompositeKey(key, image.getHeight(), image.getWidth()), image);
 	}
 
@@ -70,6 +67,7 @@ public final class ImageRegistry<K> {
 	 * @param key The key to get the image for.
 	 * @return The found image, or {@code null} if no image has yet been registered for the submitted key.
 	 */
+	@Nullable
 	public Image getImage(K key) {
 		return getImage(key, 0.0, null);
 	}
@@ -84,7 +82,8 @@ public final class ImageRegistry<K> {
 	 * @param def The default image to return in case no image has hat been registered for the submitted key.
 	 * @return The found image, or the default image if no image has yet been registered for the submitted key.
 	 */
-	public Image getImage(K key, Image def) {
+	@Nullable
+	public Image getImage(K key, @Nullable Image def) {
 		return getImage(key, 0.0, def);
 	}
 
@@ -95,6 +94,7 @@ public final class ImageRegistry<K> {
 	 * @param size The size to match by the image.
 	 * @return The found image, or {@code null} if no image has yet been registered for the submitted key.
 	 */
+	@Nullable
 	public Image getImage(K key, double size) {
 		return getImage(key, size, null);
 	}
@@ -107,9 +107,8 @@ public final class ImageRegistry<K> {
 	 * @param def The default image to return in case no image has hat been registered for the submitted key.
 	 * @return The found image, or {@code null} if no image has yet been registered for the submitted key.
 	 */
-	public Image getImage(K key, double size, Image def) {
-		assert key != null;
-
+	@Nullable
+	public Image getImage(K key, double size, @Nullable Image def) {
 		CompositeKey searchKey = new CompositeKey(key, size);
 		Map.Entry<CompositeKey, Image> entry = this.imageMap.ceilingEntry(searchKey);
 
@@ -144,7 +143,9 @@ public final class ImageRegistry<K> {
 		}
 
 		@Override
-		public int compareTo(CompositeKey o) {
+		public int compareTo(@Nullable CompositeKey _o) {
+			CompositeKey o = Check.nonNull(_o);
+
 			int comparison = compareBaseKey(this.baseKey, o.baseKey);
 
 			if (comparison == 0) {
@@ -159,7 +160,7 @@ public final class ImageRegistry<K> {
 		}
 
 		@Override
-		public boolean equals(Object obj) {
+		public boolean equals(@Nullable Object obj) {
 			boolean equal = false;
 
 			if (this == obj) {

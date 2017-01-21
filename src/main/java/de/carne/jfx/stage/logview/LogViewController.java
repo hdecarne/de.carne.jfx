@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
+import de.carne.check.Nullable;
 import de.carne.jfx.application.PlatformHelper;
 import de.carne.jfx.scene.control.Alerts;
 import de.carne.jfx.scene.control.cell.ImageViewTableCell;
@@ -55,8 +56,10 @@ public class LogViewController extends StageController {
 	private final Handler logHandler = new Handler() {
 
 		@Override
-		public void publish(LogRecord record) {
-			PlatformHelper.runLater(() -> onPublish(record));
+		public void publish(@Nullable LogRecord record) {
+			if (record != null) {
+				PlatformHelper.runLater(() -> onPublish(record));
+			}
 		}
 
 		@Override
@@ -73,32 +76,40 @@ public class LogViewController extends StageController {
 
 	private final ChangeListener<Boolean> toggleListener = (p, o, n) -> onToggled(n.booleanValue());
 
+	@Nullable
 	private BooleanProperty toggleProperty = null;
 
+	@SuppressWarnings("null")
 	@FXML
-	TableView<LogRecordModel> ctlLogRecords;
+	private TableView<LogRecordModel> ctlLogRecords;
 
+	@SuppressWarnings("null")
 	@FXML
-	TableColumn<LogRecordModel, Image> ctlLogRecordLevel;
+	private TableColumn<LogRecordModel, Image> ctlLogRecordLevel;
 
+	@SuppressWarnings("null")
 	@FXML
-	TableColumn<LogRecordModel, LogRecordDate> ctlLogRecordTime;
+	private TableColumn<LogRecordModel, LogRecordDate> ctlLogRecordTime;
 
+	@SuppressWarnings("null")
 	@FXML
-	TableColumn<LogRecordModel, String> ctlLogRecordThread;
+	private TableColumn<LogRecordModel, String> ctlLogRecordThread;
 
+	@SuppressWarnings("null")
 	@FXML
-	TableColumn<LogRecordModel, String> ctlLogRecordMessage;
+	private TableColumn<LogRecordModel, String> ctlLogRecordMessage;
 
+	@SuppressWarnings("unused")
 	@FXML
-	void onCmdClear(ActionEvent evt) {
+	private void onCmdClear(ActionEvent evt) {
 		LogBuffer.clear(LOG.getLogger());
 		this.ctlLogRecords.getItems().clear();
 		LOG.notice("Log buffer cleared");
 	}
 
+	@SuppressWarnings("unused")
 	@FXML
-	void onCmdExport(ActionEvent evt) {
+	private void onCmdExport(ActionEvent evt) {
 		FileChooser chooser = new FileChooser();
 		List<ExtensionFilter> extensionFilters = new ArrayList<>();
 
@@ -121,6 +132,7 @@ public class LogViewController extends StageController {
 
 	}
 
+	@Nullable
 	Void onPublish(LogRecord record) {
 		ObservableList<LogRecordModel> records = this.ctlLogRecords.getItems();
 
@@ -181,10 +193,9 @@ public class LogViewController extends StageController {
 	 * @param toggleProperty The toggle property to set.
 	 * @return This log view for chaining.
 	 */
-	public LogViewController setToggle(BooleanProperty toggleProperty) {
+	public LogViewController setToggle(@Nullable BooleanProperty toggleProperty) {
 		if (this.toggleProperty != null) {
 			this.toggleProperty.removeListener(this.toggleListener);
-			this.toggleProperty.set(false);
 		}
 		this.toggleProperty = toggleProperty;
 		if (this.toggleProperty != null) {

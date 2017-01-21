@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 import de.carne.OS;
+import de.carne.util.Exceptions;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 
@@ -42,35 +43,26 @@ public final class PlatformHelper {
 	 * @return The wrapped {@link Runnable}.
 	 */
 	public static Runnable runLaterRunnable(Runnable runnable) {
-		return new Runnable() {
+		return () -> {
+			if (Platform.isFxApplicationThread()) {
+				runnable.run();
+			} else {
+				CountDownLatch latch = new CountDownLatch(1);
 
-			@Override
-			public void run() {
-				if (Platform.isFxApplicationThread()) {
-					runnable.run();
-				} else {
-					CountDownLatch latch = new CountDownLatch(1);
-
-					Platform.runLater(new Runnable() {
-
-						@Override
-						public void run() {
-							try {
-								runnable.run();
-							} finally {
-								latch.countDown();
-							}
-						}
-
-					});
+				Platform.runLater(() -> {
 					try {
-						latch.await();
-					} catch (InterruptedException e) {
-						Thread.currentThread().interrupt();
+						runnable.run();
+					} finally {
+						latch.countDown();
 					}
+				});
+				try {
+					latch.await();
+				} catch (InterruptedException e) {
+					Exceptions.ignore(e);
+					Thread.currentThread().interrupt();
 				}
 			}
-
 		};
 	}
 
@@ -90,21 +82,17 @@ public final class PlatformHelper {
 			CountDownLatch latch = new CountDownLatch(1);
 			AtomicReference<R> resultHolder = new AtomicReference<>(null);
 
-			Platform.runLater(new Runnable() {
-
-				@Override
-				public void run() {
-					try {
-						resultHolder.set(supplier.get());
-					} finally {
-						latch.countDown();
-					}
+			Platform.runLater(() -> {
+				try {
+					resultHolder.set(supplier.get());
+				} finally {
+					latch.countDown();
 				}
-
 			});
 			try {
 				latch.await();
 			} catch (InterruptedException e) {
+				Exceptions.ignore(e);
 				Thread.currentThread().interrupt();
 			}
 			result = resultHolder.get();
@@ -123,21 +111,17 @@ public final class PlatformHelper {
 		} else {
 			CountDownLatch latch = new CountDownLatch(1);
 
-			Platform.runLater(new Runnable() {
-
-				@Override
-				public void run() {
-					try {
-						runnable.run();
-					} finally {
-						latch.countDown();
-					}
+			Platform.runLater(() -> {
+				try {
+					runnable.run();
+				} finally {
+					latch.countDown();
 				}
-
 			});
 			try {
 				latch.await();
 			} catch (InterruptedException e) {
+				Exceptions.ignore(e);
 				Thread.currentThread().interrupt();
 			}
 		}
