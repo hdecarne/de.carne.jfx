@@ -21,6 +21,11 @@
          <children>
             <Button mnemonicParsing="false" onAction="#onCmdClear" text="%_STR_BUTTON_CLEAR" />
             <Button layoutX="435.0" layoutY="10.0" mnemonicParsing="false" onAction="#onCmdExport" text="%_STR_BUTTON_EXPORT" />
+            <Button layoutX="425.0" layoutY="10.0" mnemonicParsing="false" onAction="#onCmdClose" text="%_STR_BUTTON_CLOSE">
+               <HBox.margin>
+                  <Insets left="8.0" />
+               </HBox.margin>
+            </Button>
          </children>
          <VBox.margin>
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />

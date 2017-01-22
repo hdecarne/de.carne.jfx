@@ -132,6 +132,12 @@ public class LogViewController extends StageController {
 
 	}
 
+	@SuppressWarnings("unused")
+	@FXML
+	private void onCmdClose(ActionEvent evt) {
+		close(false);
+	}
+
 	@Nullable
 	Void onPublish(LogRecord record) {
 		ObservableList<LogRecordModel> records = this.ctlLogRecords.getItems();

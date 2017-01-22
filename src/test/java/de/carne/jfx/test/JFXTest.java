@@ -27,6 +27,8 @@ import org.testfx.api.FxToolkit;
 import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.TextMatchers;
 
+import de.carne.util.logging.LogConfig;
+
 /**
  * TestFX based test case responsible for performing all JavaFX based tests.
  */
@@ -44,6 +46,8 @@ public class JFXTest extends FxRobot {
 	 */
 	@BeforeClass
 	public static void setUpTestFX() throws Exception {
+		System.setProperty("enableTestMode", "true");
+		LogConfig.applyConfig(LogConfig.CONFIG_DEBUG);
 		Locale.setDefault(Locale.US);
 		if (!Boolean.getBoolean(PROPERTY_NO_HEADLESS_MODE)) {
 			System.out.println("Using headless mode...");
@@ -72,7 +76,7 @@ public class JFXTest extends FxRobot {
 	@Test
 	public void testScenarios() {
 		scenarioOpened();
-		// scenarioLogs();
+		scenarioLogs();
 		scenarioAbout();
 		scenarioClose();
 	}
@@ -85,7 +89,10 @@ public class JFXTest extends FxRobot {
 		assertRoot();
 		clickOn("#menuHelp");
 		clickOn("#menuLogs");
-		closeCurrentWindow();
+		// clickOn(TextMatchers.hasText("Export\u2026"));
+		// push(KeyCode.ESCAPE).sleep(100);
+		clickOn(TextMatchers.hasText("Clear"));
+		clickOn(TextMatchers.hasText("Close"));
 	}
 
 	private void scenarioAbout() {

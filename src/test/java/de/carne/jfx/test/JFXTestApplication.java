@@ -16,6 +16,7 @@
  */
 package de.carne.jfx.test;
 
+import de.carne.ApplicationShutdownTask;
 import de.carne.check.Check;
 import de.carne.check.Nullable;
 import de.carne.jfx.stage.StageController;
@@ -30,6 +31,11 @@ public class JFXTestApplication extends Application {
 	@Override
 	public void start(@Nullable Stage primaryStage) throws Exception {
 		StageController.loadPrimaryStage(Check.nonNull(primaryStage), JFXTestController.class).show();
+	}
+
+	@Override
+	public void stop() throws Exception {
+		ApplicationShutdownTask.trigger();
 	}
 
 }
