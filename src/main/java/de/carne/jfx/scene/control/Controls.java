@@ -18,6 +18,7 @@ package de.carne.jfx.scene.control;
 
 import java.util.Comparator;
 
+import de.carne.check.Nullable;
 import de.carne.util.DefaultSet;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -36,15 +37,15 @@ public final class Controls {
 	 *
 	 * @param <T> The {@link ComboBox}'s element type.
 	 * @param control The {@link ComboBox} to reset.
-	 * @param defaultSet The {@link DefaultSet} to apply.
+	 * @param defaultSet The {@link DefaultSet} to apply (may be {@code null}).
 	 * @param comparator The {@link Comparator} to use for combobox item sorting.
 	 */
-	public static <T> void resetComboBoxOptions(ComboBox<T> control, DefaultSet<T> defaultSet,
+	public static <T> void resetComboBoxOptions(ComboBox<T> control, @Nullable DefaultSet<T> defaultSet,
 			Comparator<T> comparator) {
 		ObservableList<T> options = control.getItems();
 
 		options.clear();
-		if (!defaultSet.isEmpty()) {
+		if (defaultSet != null && !defaultSet.isEmpty()) {
 			options.addAll(defaultSet);
 			options.sort(comparator);
 			control.setValue(defaultSet.getDefault());

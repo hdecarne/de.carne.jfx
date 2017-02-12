@@ -19,6 +19,7 @@ package de.carne.jfx.scene.control;
 import java.util.Collection;
 import java.util.logging.LogRecord;
 
+import de.carne.check.Nullable;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 
@@ -37,11 +38,11 @@ public class DialogHelper {
 	 * @param <R> The dialog's result type.
 	 * @param <T> The actual {@link Dialog} type.
 	 * @param dialog The dialog to add the exception to.
-	 * @param throwable The exception to add (may by {@code null}).
+	 * @param throwable The exception to add (may be {@code null}).
 	 * @return The updated dialog.
 	 * @see DialogPane#setExpandableContent(javafx.scene.Node)
 	 */
-	public static <R, T extends Dialog<R>> T setExceptionContent(T dialog, Throwable throwable) {
+	public static <R, T extends Dialog<R>> T setExceptionContent(T dialog, @Nullable Throwable throwable) {
 		DialogPaneHelper.setExceptionContent(dialog.getDialogPane(), throwable);
 		return dialog;
 	}
