@@ -200,12 +200,16 @@ public class LogViewController extends StageController {
 	 * @return This log view for chaining.
 	 */
 	public LogViewController setToggle(@Nullable BooleanProperty toggleProperty) {
-		if (this.toggleProperty != null) {
-			this.toggleProperty.removeListener(this.toggleListener);
+		BooleanProperty oldToggleProperty = this.toggleProperty;
+
+		if (oldToggleProperty != null) {
+			oldToggleProperty.removeListener(this.toggleListener);
 		}
-		this.toggleProperty = toggleProperty;
-		if (this.toggleProperty != null) {
-			this.toggleProperty.addListener(this.toggleListener);
+
+		BooleanProperty newToggleProperty = this.toggleProperty = toggleProperty;
+
+		if (newToggleProperty != null) {
+			newToggleProperty.addListener(this.toggleListener);
 		}
 		return this;
 	}

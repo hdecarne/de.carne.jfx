@@ -16,8 +16,7 @@
  */
 package de.carne.jfx.scene.control;
 
-import de.carne.check.Check;
-import de.carne.check.Nullable;
+import de.carne.util.Late;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -30,8 +29,7 @@ import javafx.scene.control.ListView;
  */
 public abstract class ListViewEditor<T> {
 
-	@Nullable
-	private ListView<T> listViewInitialized = null;
+	private Late<ListView<T>> listViewParam = new Late<>();
 
 	/**
 	 * Initialize the editor.
@@ -40,8 +38,9 @@ public abstract class ListViewEditor<T> {
 	 * @return This editor.
 	 */
 	public ListViewEditor<T> init(ListView<T> listView) {
-		this.listViewInitialized = listView;
-		this.listViewInitialized.getSelectionModel().selectedItemProperty().addListener((p, o, n) -> setInput(n));
+		ListView<T> initializedListView = this.listViewParam.initialize(listView);
+
+		initializedListView.getSelectionModel().selectedItemProperty().addListener((p, o, n) -> setInput(n));
 		return this;
 	}
 
@@ -217,7 +216,7 @@ public abstract class ListViewEditor<T> {
 	}
 
 	private ListView<T> getListView() {
-		return Check.nonNull(this.listViewInitialized, "not initialized");
+		return this.listViewParam.get();
 	}
 
 }

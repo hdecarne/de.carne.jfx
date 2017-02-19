@@ -29,7 +29,7 @@ import de.carne.VM;
 import de.carne.check.Nullable;
 import de.carne.jfx.fxml.FXMLController;
 import de.carne.jfx.scene.control.DialogController;
-import de.carne.util.ObjectHolder;
+import de.carne.util.Lazy;
 import de.carne.util.logging.Log;
 import javafx.application.Application;
 import javafx.concurrent.Task;
@@ -53,12 +53,12 @@ public abstract class StageController extends FXMLController<Stage> {
 
 	private static final Log LOG = new Log();
 
-	private static final ObjectHolder<ScheduledExecutorService> EXECUTOR_SERVICE = new ObjectHolder<>(
+	private static final Lazy<ScheduledExecutorService> EXECUTOR_SERVICE = new Lazy<>(
 			() -> Executors.newSingleThreadScheduledExecutor());
 
 	static {
 		ApplicationShutdownTask.register(StageController.class.getSimpleName(), () -> {
-			if (EXECUTOR_SERVICE.isSet()) {
+			if (EXECUTOR_SERVICE.isInitialized()) {
 				EXECUTOR_SERVICE.get().shutdown();
 			}
 		});
