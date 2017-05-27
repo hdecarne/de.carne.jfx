@@ -78,7 +78,7 @@ public final class DialogPaneHelper {
 		if (logRecords != null && !logRecords.isEmpty()) {
 			ListView<LogRecord> logView = new ListView<>(FXCollections.observableArrayList(logRecords));
 
-			logView.setCellFactory(param -> new ListCell<LogRecord>() {
+			logView.setCellFactory((param) -> new ListCell<LogRecord>() {
 
 				@Override
 				protected void updateItem(@Nullable LogRecord item, boolean empty) {

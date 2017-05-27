@@ -38,7 +38,7 @@ public abstract class ListViewEditor<T> {
 	 * @return This editor.
 	 */
 	public ListViewEditor<T> init(ListView<T> listView) {
-		ListView<T> initializedListView = this.listViewParam.initialize(listView);
+		ListView<T> initializedListView = this.listViewParam.init(listView);
 
 		initializedListView.getSelectionModel().selectedItemProperty().addListener((p, o, n) -> setInput(n));
 		return this;
@@ -51,7 +51,7 @@ public abstract class ListViewEditor<T> {
 	 * @return This editor.
 	 */
 	public ListViewEditor<T> setAddCommand(Button cmdButton) {
-		cmdButton.setOnAction((evt) -> onAddAction(evt));
+		cmdButton.setOnAction(this::onAddAction);
 		return this;
 	}
 
