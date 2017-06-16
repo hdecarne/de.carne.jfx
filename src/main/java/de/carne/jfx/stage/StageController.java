@@ -155,7 +155,9 @@ public abstract class StageController extends FXMLController<Stage> {
 	protected void setSystemMenuBar() {
 		// Do not use system menu bar in test mode as this may break the UI test robot.
 		if (!VM.TEST_MODE_ENABLED) {
-			for (Node node : getUI().getScene().getRoot().getChildrenUnmodifiable()) {
+			Parent root = getUI().getScene().getRoot();
+
+			for (Node node : root.getChildrenUnmodifiable()) {
 				if (node instanceof MenuBar) {
 					((MenuBar) node).setUseSystemMenuBar(true);
 					break;
