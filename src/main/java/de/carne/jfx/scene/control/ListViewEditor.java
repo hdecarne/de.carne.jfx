@@ -16,6 +16,7 @@
  */
 package de.carne.jfx.scene.control;
 
+import de.carne.check.Nullable;
 import de.carne.util.Late;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -116,6 +117,7 @@ public abstract class ListViewEditor<T> {
 	 *
 	 * @return The entered list element or {@code null} if the current input is empty or not valid.
 	 */
+	@Nullable
 	protected abstract T getInput();
 
 	/**
@@ -123,7 +125,7 @@ public abstract class ListViewEditor<T> {
 	 *
 	 * @param input The selected list element's data or {@code null} if nothing is selected.
 	 */
-	protected abstract void setInput(T input);
+	protected abstract void setInput(@Nullable T input);
 
 	/**
 	 * Add action handler.
