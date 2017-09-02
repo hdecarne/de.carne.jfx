@@ -30,7 +30,7 @@ import javafx.scene.control.ListView;
  */
 public abstract class ListViewEditor<T> {
 
-	private Late<ListView<T>> listViewParam = new Late<>();
+	private final Late<ListView<T>> listViewParam = new Late<>();
 
 	/**
 	 * Initialize the editor.
