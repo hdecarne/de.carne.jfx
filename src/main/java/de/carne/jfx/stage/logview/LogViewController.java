@@ -204,6 +204,7 @@ public class LogViewController extends StageController {
 
 		if (oldToggleProperty != null) {
 			oldToggleProperty.removeListener(this.toggleListener);
+			oldToggleProperty.set(false);
 		}
 
 		BooleanProperty newToggleProperty = this.toggleProperty = toggleProperty;
