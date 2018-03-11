@@ -26,7 +26,6 @@ repositories {
 
 dependencies {
 	compile('de.carne:java-default:4')
-    
 	testCompile('junit:junit:4.12')
 	testCompile('org.testfx:testfx-core:4.0.5-alpha')
 	testCompile('org.testfx:openjfx-monocle:8u20-b26')
