@@ -19,6 +19,7 @@ package de.carne.jfx.scene.image;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.NavigableMap;
+import java.util.Objects;
 import java.util.TreeMap;
 
 import de.carne.check.Check;
@@ -156,7 +157,7 @@ public final class ImageRegistry<K> {
 
 		@Override
 		public int hashCode() {
-			return (this.baseKey.hashCode() << 16) | this.sizeKey;
+			return Objects.hash(this.baseKey, this.sizeKey);
 		}
 
 		@Override
