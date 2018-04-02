@@ -17,7 +17,6 @@
 package de.carne.jfx.util.validation;
 
 import de.carne.jfx.scene.control.DialogHelper;
-import de.carne.util.validation.ValidationException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;

@@ -39,7 +39,7 @@ public abstract class ListViewEditor<T> {
 	 * @return This editor.
 	 */
 	public ListViewEditor<T> init(ListView<T> listView) {
-		ListView<T> initializedListView = this.listViewParam.init(listView);
+		ListView<T> initializedListView = this.listViewParam.set(listView);
 
 		initializedListView.getSelectionModel().selectedItemProperty().addListener((p, o, n) -> setInput(n));
 		return this;

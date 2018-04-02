@@ -21,6 +21,7 @@ import java.util.logging.LogRecord;
 
 import de.carne.check.Nullable;
 import de.carne.util.logging.Log;
+import de.carne.util.logging.LogLevel;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -94,11 +95,11 @@ public final class Alerts {
 
 	private static void logAlertMessage(AlertType type, String message, @Nullable Throwable throwable) {
 		if (AlertType.ERROR.equals(type)) {
-			LOG.error(throwable, message);
+			LOG.log(LogLevel.LEVEL_ERROR, throwable, message);
 		} else if (AlertType.WARNING.equals(type)) {
-			LOG.error(throwable, message);
+			LOG.log(LogLevel.LEVEL_WARNING, throwable, message);
 		} else if (AlertType.INFORMATION.equals(type)) {
-			LOG.info(throwable, message);
+			LOG.log(LogLevel.LEVEL_INFO, throwable, message);
 		}
 	}
 

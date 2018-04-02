@@ -145,7 +145,7 @@ public final class ImageRegistry<K> {
 
 		@Override
 		public int compareTo(@Nullable CompositeKey _o) {
-			CompositeKey o = Check.nonNull(_o);
+			CompositeKey o = Check.notNull(_o);
 
 			int comparison = compareBaseKey(this.baseKey, o.baseKey);
 

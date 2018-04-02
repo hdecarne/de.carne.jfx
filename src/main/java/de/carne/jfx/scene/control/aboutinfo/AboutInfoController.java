@@ -23,8 +23,8 @@ import java.net.URL;
 
 import de.carne.check.Nullable;
 import de.carne.jfx.scene.control.DialogController;
-import de.carne.util.AboutInfo;
 import de.carne.util.Exceptions;
+import de.carne.util.ManifestInfos;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -46,9 +46,9 @@ public class AboutInfoController extends DialogController<ButtonType> {
 
 	@Override
 	protected void setupDialog(Dialog<ButtonType> dialog) {
-		dialog.setTitle(AboutInfoI18N.formatSTR_STAGE_TITLE(AboutInfo.PROJECT_ID));
-		dialog.setHeaderText(AboutInfoI18N.formatSTR_TEXT_HEADER(AboutInfo.PROJECT_NAME, AboutInfo.PROJECT_VERSION,
-				AboutInfo.PROJECT_BUILD));
+		dialog.setTitle(AboutInfoI18N.formatSTR_STAGE_TITLE(ManifestInfos.APPLICATION_NAME));
+		dialog.setHeaderText(AboutInfoI18N.formatSTR_TEXT_HEADER(ManifestInfos.APPLICATION_NAME,
+				ManifestInfos.APPLICATION_VERSION, ManifestInfos.APPLICATION_BUILD));
 	}
 
 	/**

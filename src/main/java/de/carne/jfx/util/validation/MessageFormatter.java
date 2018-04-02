@@ -14,22 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.carne.jfx.test;
-
-import de.carne.check.Check;
-import de.carne.check.Nullable;
-import de.carne.jfx.stage.StageController;
-import javafx.application.Application;
-import javafx.stage.Stage;
+package de.carne.jfx.util.validation;
 
 /**
- * Test application containing a UI utilizing all features to test.
+ * Functional interface for message formatting.
  */
-public class JFXTestApplication extends Application {
+@FunctionalInterface
+public interface MessageFormatter {
 
-	@Override
-	public void start(@Nullable Stage primaryStage) throws Exception {
-		StageController.loadPrimaryStage(Check.notNull(primaryStage), JFXTestController.class).show();
-	}
+	/**
+	 * Format message.
+	 *
+	 * @param arguments Format arguments.
+	 * @return The formatted message.
+	 */
+	String format(Object... arguments);
 
 }

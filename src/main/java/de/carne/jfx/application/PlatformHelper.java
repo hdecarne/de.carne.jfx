@@ -22,7 +22,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
-import de.carne.OS;
 import de.carne.util.Exceptions;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
@@ -136,7 +135,7 @@ public final class PlatformHelper {
 	 * @return The filtered icons.
 	 */
 	public static Image[] stageIcons(Image... icons) {
-		if (OS.IS_MACOS) {
+		if (de.carne.util.Platform.IS_MACOS) {
 			return EMPTY_ICONS;
 		}
 		return icons;
@@ -149,7 +148,7 @@ public final class PlatformHelper {
 	 * @return The filtered icons.
 	 */
 	public static Collection<Image> stageIcons(Collection<Image> icons) {
-		if (OS.IS_MACOS) {
+		if (de.carne.util.Platform.IS_MACOS) {
 			return Collections.emptyList();
 		}
 		return icons;

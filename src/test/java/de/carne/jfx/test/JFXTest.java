@@ -27,7 +27,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.TextMatchers;
 
-import de.carne.util.logging.LogConfig;
+import de.carne.util.logging.Logs;
 
 /**
  * TestFX based test case responsible for performing all JavaFX based tests.
@@ -47,7 +47,7 @@ public class JFXTest extends FxRobot {
 	@BeforeClass
 	public static void setUpTestFX() throws Exception {
 		System.setProperty("enableTestMode", "true");
-		LogConfig.applyConfig(LogConfig.CONFIG_DEBUG);
+		Logs.readConfig(Logs.CONFIG_DEBUG);
 		Locale.setDefault(Locale.US);
 		if (!Boolean.getBoolean(PROPERTY_NO_HEADLESS_MODE)) {
 			System.out.println("Using headless mode...");

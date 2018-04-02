@@ -9,6 +9,7 @@ buildscript {
 	repositories {
 		mavenLocal()
 		mavenCentral()
+		jcenter()
 	}
 	dependencies {
 		classpath("de.carne:java-gradleplugins:0.4.0")
@@ -21,11 +22,15 @@ targetCompatibility = 1.8
 repositories {
 	mavenLocal()
 	mavenCentral()
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' } 
+	jcenter()
+	if(project.version.endsWith("-SNAPSHOT")) {
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+		maven { url "https://oss.jfrog.org/libs-snapshot/" }
+	} 
 }
 
 dependencies {
-	compile('de.carne:java-default:4')
+	compile('de.carne.common:java-default:8.3.+')
 	testCompile('junit:junit:4.12')
 	testCompile('org.testfx:testfx-core:4.0.5-alpha')
 	testCompile('org.testfx:openjfx-monocle:8u20-b26')

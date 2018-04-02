@@ -42,9 +42,9 @@ public final class FileChooserHelper {
 	 * @return The created {@link ExtensionFilter} object.
 	 */
 	public static ExtensionFilter filterFromString(String str) {
-		String[] tokens = Strings.split(str, "|");
+		String[] tokens = Strings.split(str, '|', true);
 
-		Check.condition(tokens.length >= 2);
+		Check.assertTrue(tokens.length >= 2);
 
 		return new ExtensionFilter(tokens[0], Arrays.copyOfRange(tokens, 1, tokens.length));
 	}

@@ -66,7 +66,7 @@ public abstract class FXMLController<U> {
 	 * @return The UI resource bundle.
 	 */
 	protected final ResourceBundle getResources() {
-		return Check.nonNull(this.resources);
+		return Check.notNull(this.resources);
 	}
 
 	final void setUI(U ui) {
@@ -79,7 +79,7 @@ public abstract class FXMLController<U> {
 	 * @return The UI object.
 	 */
 	public final U getUI() {
-		return Check.nonNull(this.ui);
+		return Check.notNull(this.ui);
 	}
 
 	/**

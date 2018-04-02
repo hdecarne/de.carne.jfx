@@ -53,6 +53,8 @@ public class LogViewController extends StageController {
 
 	private static final Log LOG = new Log();
 
+	private static final int RECORD_LIMIT = 1000;
+
 	private final Handler logHandler = new Handler() {
 
 		@Override
@@ -102,7 +104,7 @@ public class LogViewController extends StageController {
 	@SuppressWarnings("unused")
 	@FXML
 	private void onCmdClear(ActionEvent evt) {
-		LogBuffer.clear(LOG.getLogger());
+		LogBuffer.flush(LOG.logger());
 		this.ctlLogRecords.getItems().clear();
 		LOG.notice("Log buffer cleared");
 	}
@@ -124,7 +126,7 @@ public class LogViewController extends StageController {
 		if (file != null) {
 			LOG.info("Exporting log buffer to file: ''{0}''...", file);
 			try {
-				LogBuffer.exportTo(LOG.getLogger(), file);
+				LogBuffer.exportTo(LOG.logger(), file, false);
 			} catch (IOException e) {
 				Alerts.unexpected(e).showAndWait();
 			}
@@ -142,7 +144,7 @@ public class LogViewController extends StageController {
 	Void onPublish(LogRecord record) {
 		ObservableList<LogRecordModel> records = this.ctlLogRecords.getItems();
 
-		while (records.size() >= LogBuffer.BUFFER_LIMIT) {
+		while (records.size() >= RECORD_LIMIT) {
 			records.remove(0);
 		}
 		records.add(new LogRecordModel(record));
@@ -159,9 +161,9 @@ public class LogViewController extends StageController {
 
 	private void onShowingChanged(boolean showing) {
 		if (showing) {
-			LogBuffer.addHandler(LOG.getLogger(), this.logHandler);
+			LogBuffer.addHandler(LOG.logger(), this.logHandler, true);
 		} else {
-			LogBuffer.removeHandler(LOG.getLogger(), this.logHandler);
+			LogBuffer.removeHandler(LOG.logger(), this.logHandler);
 			setToggle(null);
 		}
 	}

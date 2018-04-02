@@ -24,8 +24,6 @@ import java.util.function.Function;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import de.carne.ApplicationShutdownTask;
-import de.carne.VM;
 import de.carne.check.Nullable;
 import de.carne.jfx.fxml.FXMLController;
 import de.carne.jfx.scene.control.DialogController;
@@ -53,15 +51,14 @@ public abstract class StageController extends FXMLController<Stage> {
 
 	private static final Log LOG = new Log();
 
+	private static final boolean TEST_MODE_ENABLED = Boolean.getBoolean("enableTestMode");
+
 	private static final Lazy<ScheduledExecutorService> EXECUTOR_SERVICE = new Lazy<>(
-			() -> Executors.newSingleThreadScheduledExecutor());
+			Executors::newSingleThreadScheduledExecutor);
 
 	static {
-		ApplicationShutdownTask.register(StageController.class.getSimpleName(), () -> {
-			if (EXECUTOR_SERVICE.isInitialized()) {
-				EXECUTOR_SERVICE.get().shutdown();
-			}
-		});
+		Runtime.getRuntime().addShutdownHook(
+				new Thread(() -> EXECUTOR_SERVICE.toOptional().ifPresent(ScheduledExecutorService::shutdown)));
 	}
 
 	private final AtomicInteger backgroundTaskCount = new AtomicInteger(0);
@@ -154,7 +151,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	 */
 	protected void setSystemMenuBar() {
 		// Do not use system menu bar in test mode as this may break the UI test robot.
-		if (!VM.TEST_MODE_ENABLED) {
+		if (!TEST_MODE_ENABLED) {
 			Parent root = getUI().getScene().getRoot();
 
 			for (Node node : root.getChildrenUnmodifiable()) {
