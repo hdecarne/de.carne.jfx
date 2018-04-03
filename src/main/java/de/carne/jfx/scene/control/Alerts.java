@@ -19,9 +19,9 @@ package de.carne.jfx.scene.control;
 import java.util.Collection;
 import java.util.logging.LogRecord;
 
+import de.carne.boot.logging.Log;
+import de.carne.boot.logging.LogLevel;
 import de.carne.check.Nullable;
-import de.carne.util.logging.Log;
-import de.carne.util.logging.LogLevel;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;

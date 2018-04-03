@@ -27,7 +27,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.TextMatchers;
 
-import de.carne.util.logging.Logs;
+import de.carne.boot.logging.Logs;
 
 /**
  * TestFX based test case responsible for performing all JavaFX based tests.

@@ -23,14 +23,14 @@ import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
+import de.carne.boot.logging.Log;
+import de.carne.boot.logging.LogBuffer;
 import de.carne.check.Nullable;
 import de.carne.jfx.application.PlatformHelper;
 import de.carne.jfx.scene.control.Alerts;
 import de.carne.jfx.scene.control.cell.ImageViewTableCell;
 import de.carne.jfx.stage.StageController;
 import de.carne.jfx.util.FileChooserHelper;
-import de.carne.util.logging.Log;
-import de.carne.util.logging.LogBuffer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;

@@ -135,7 +135,7 @@ public final class PlatformHelper {
 	 * @return The filtered icons.
 	 */
 	public static Image[] stageIcons(Image... icons) {
-		if (de.carne.util.Platform.IS_MACOS) {
+		if (de.carne.boot.Platform.IS_MACOS) {
 			return EMPTY_ICONS;
 		}
 		return icons;
@@ -148,7 +148,7 @@ public final class PlatformHelper {
 	 * @return The filtered icons.
 	 */
 	public static Collection<Image> stageIcons(Collection<Image> icons) {
-		if (de.carne.util.Platform.IS_MACOS) {
+		if (de.carne.boot.Platform.IS_MACOS) {
 			return Collections.emptyList();
 		}
 		return icons;

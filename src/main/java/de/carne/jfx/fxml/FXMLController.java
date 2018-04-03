@@ -23,9 +23,9 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.carne.boot.logging.Log;
 import de.carne.check.Check;
 import de.carne.check.Nullable;
-import de.carne.util.logging.Log;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Window;
