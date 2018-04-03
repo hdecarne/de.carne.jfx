@@ -37,6 +37,12 @@ dependencies {
 	testCompile('org.testfx:openjfx-monocle:8u20-b26')
 }
 
+jar {
+	manifest {
+		attributes "Automatic-Module-Name": automaticModuleName
+	}
+}
+
 jacocoTestReport {
 	reports {
 		xml.enabled true
