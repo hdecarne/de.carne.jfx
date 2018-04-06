@@ -19,10 +19,10 @@ package de.carne.jfx.scene.control;
 import java.util.Collection;
 import java.util.logging.LogRecord;
 
+import de.carne.boot.Exceptions;
 import de.carne.boot.check.Nullable;
 import de.carne.jfx.stage.logview.LogViewFormats;
 import de.carne.jfx.stage.logview.LogViewImages;
-import de.carne.util.Exceptions;
 import javafx.collections.FXCollections;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListCell;

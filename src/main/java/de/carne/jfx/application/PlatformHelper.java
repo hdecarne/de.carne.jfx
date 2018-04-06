@@ -22,7 +22,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
-import de.carne.util.Exceptions;
+import de.carne.boot.Exceptions;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 

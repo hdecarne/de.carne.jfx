@@ -24,12 +24,12 @@ import java.util.function.Function;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import de.carne.boot.logging.Log;
+import de.carne.boot.ShutdownHooks;
 import de.carne.boot.check.Nullable;
+import de.carne.boot.logging.Log;
 import de.carne.jfx.fxml.FXMLController;
 import de.carne.jfx.scene.control.DialogController;
 import de.carne.util.Lazy;
-import de.carne.util.ShutdownHooks;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.scene.Node;
