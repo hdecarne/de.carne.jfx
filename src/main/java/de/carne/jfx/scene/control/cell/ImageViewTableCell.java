@@ -16,7 +16,7 @@
  */
 package de.carne.jfx.scene.control.cell;
 
-import de.carne.check.Nullable;
+import de.carne.boot.check.Nullable;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;

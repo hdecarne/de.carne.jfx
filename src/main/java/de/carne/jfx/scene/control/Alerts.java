@@ -21,7 +21,7 @@ import java.util.logging.LogRecord;
 
 import de.carne.boot.logging.Log;
 import de.carne.boot.logging.LogLevel;
-import de.carne.check.Nullable;
+import de.carne.boot.check.Nullable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;

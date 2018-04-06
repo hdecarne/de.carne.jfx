@@ -16,7 +16,7 @@
  */
 package de.carne.jfx.scene.control;
 
-import de.carne.check.Nullable;
+import de.carne.boot.check.Nullable;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;

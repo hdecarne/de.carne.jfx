@@ -16,7 +16,7 @@
  */
 package de.carne.jfx.scene.control;
 
-import de.carne.check.Nullable;
+import de.carne.boot.check.Nullable;
 import de.carne.util.Late;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

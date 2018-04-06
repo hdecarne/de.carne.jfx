@@ -22,8 +22,8 @@ import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import de.carne.check.Check;
-import de.carne.check.Nullable;
+import de.carne.boot.check.Check;
+import de.carne.boot.check.Nullable;
 import javafx.scene.image.Image;
 
 /**

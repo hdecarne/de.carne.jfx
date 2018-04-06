@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.function.Function;
 
-import de.carne.check.Nullable;
+import de.carne.boot.check.Nullable;
 import de.carne.jfx.fxml.FXMLController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

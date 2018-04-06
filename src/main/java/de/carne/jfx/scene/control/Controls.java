@@ -18,7 +18,7 @@ package de.carne.jfx.scene.control;
 
 import java.util.Comparator;
 
-import de.carne.check.Nullable;
+import de.carne.boot.check.Nullable;
 import de.carne.jfx.util.DefaultSet;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;

@@ -25,7 +25,7 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import de.carne.boot.logging.Log;
-import de.carne.check.Nullable;
+import de.carne.boot.check.Nullable;
 import de.carne.jfx.fxml.FXMLController;
 import de.carne.jfx.scene.control.DialogController;
 import de.carne.util.Lazy;

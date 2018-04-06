@@ -19,7 +19,7 @@ package de.carne.jfx.scene.control;
 import java.util.Collection;
 import java.util.logging.LogRecord;
 
-import de.carne.check.Nullable;
+import de.carne.boot.check.Nullable;
 import de.carne.jfx.stage.logview.LogViewFormats;
 import de.carne.jfx.stage.logview.LogViewImages;
 import de.carne.util.Exceptions;

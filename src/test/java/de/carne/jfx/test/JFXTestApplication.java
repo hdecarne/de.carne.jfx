@@ -16,8 +16,8 @@
  */
 package de.carne.jfx.test;
 
-import de.carne.check.Check;
-import de.carne.check.Nullable;
+import de.carne.boot.check.Check;
+import de.carne.boot.check.Nullable;
 import de.carne.jfx.stage.StageController;
 import javafx.application.Application;
 import javafx.stage.Stage;

@@ -18,7 +18,7 @@ package de.carne.jfx.util;
 
 import java.util.Arrays;
 
-import de.carne.check.Check;
+import de.carne.boot.check.Check;
 import de.carne.util.Strings;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;

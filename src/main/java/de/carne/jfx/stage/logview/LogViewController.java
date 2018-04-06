@@ -25,7 +25,7 @@ import java.util.logging.LogRecord;
 
 import de.carne.boot.logging.Log;
 import de.carne.boot.logging.LogBuffer;
-import de.carne.check.Nullable;
+import de.carne.boot.check.Nullable;
 import de.carne.jfx.application.PlatformHelper;
 import de.carne.jfx.scene.control.Alerts;
 import de.carne.jfx.scene.control.cell.ImageViewTableCell;
