@@ -1,6 +1,6 @@
 #### Common JavaFX code shared between projects.
 
-[![Build Status](https://travis-ci.org/hdecarne/java-jfx.svg?branch=master)](https://travis-ci.org/hdecarne/java-jfx)
+[![Build Status](https://travis-ci.com/hdecarne/java-jfx.svg?branch=master)](https://travis-ci.com/hdecarne/java-jfx)
 [![codecov](https://codecov.io/gh/hdecarne/java-jfx/branch/master/graph/badge.svg)](https://codecov.io/gh/hdecarne/java-jfx)
 
 #### License
