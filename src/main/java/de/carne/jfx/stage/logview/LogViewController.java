@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
+import de.carne.boot.check.Nullable;
 import de.carne.boot.logging.Log;
 import de.carne.boot.logging.LogBuffer;
-import de.carne.boot.check.Nullable;
 import de.carne.jfx.application.PlatformHelper;
 import de.carne.jfx.scene.control.Alerts;
 import de.carne.jfx.scene.control.cell.ImageViewTableCell;
@@ -81,23 +81,18 @@ public class LogViewController extends StageController {
 	@Nullable
 	private BooleanProperty toggleProperty = null;
 
-	@SuppressWarnings("null")
 	@FXML
 	private TableView<LogRecordModel> ctlLogRecords;
 
-	@SuppressWarnings("null")
 	@FXML
 	private TableColumn<LogRecordModel, Image> ctlLogRecordLevel;
 
-	@SuppressWarnings("null")
 	@FXML
 	private TableColumn<LogRecordModel, LogRecordDate> ctlLogRecordTime;
 
-	@SuppressWarnings("null")
 	@FXML
 	private TableColumn<LogRecordModel, String> ctlLogRecordThread;
 
-	@SuppressWarnings("null")
 	@FXML
 	private TableColumn<LogRecordModel, String> ctlLogRecordMessage;
 

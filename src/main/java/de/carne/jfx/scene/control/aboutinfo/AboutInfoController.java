@@ -40,7 +40,6 @@ import javafx.scene.layout.AnchorPane;
  */
 public class AboutInfoController extends DialogController<ButtonType> {
 
-	@SuppressWarnings("null")
 	@FXML
 	private TabPane ctlInfoTabs;
 
