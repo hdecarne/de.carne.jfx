@@ -6,6 +6,9 @@ jdk:
 os:
   - linux
 
+git:
+  depth: false  
+
 script:
   - ./gradlew check
   - ./gradlew jacocoTestReport
@@ -24,7 +27,7 @@ addons:
     packages:
       - oracle-java8-installer
 
-# See https://docs.travis-ci.com/user/languages/java/#Caching
+# See https://docs.travis-ci.com/user/languages/java/#caching
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
