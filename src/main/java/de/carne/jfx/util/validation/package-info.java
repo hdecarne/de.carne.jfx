@@ -17,4 +17,4 @@
 @NonNullByDefault
 package de.carne.jfx.util.validation;
 
-import de.carne.boot.check.NonNullByDefault;
+import org.eclipse.jdt.annotation.NonNullByDefault;

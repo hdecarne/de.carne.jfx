@@ -19,7 +19,8 @@ package de.carne.jfx.scene.control;
 import java.util.Collection;
 import java.util.logging.LogRecord;
 
-import de.carne.boot.check.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
+
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 

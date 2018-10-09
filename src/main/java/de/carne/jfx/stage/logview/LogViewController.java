@@ -23,7 +23,8 @@ import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-import de.carne.boot.check.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
+
 import de.carne.boot.logging.Log;
 import de.carne.boot.logging.LogBuffer;
 import de.carne.jfx.application.PlatformHelper;

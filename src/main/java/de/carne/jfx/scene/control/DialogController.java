@@ -20,7 +20,8 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.function.Function;
 
-import de.carne.boot.check.Nullable;
+import org.eclipse.jdt.annotation.Nullable;
+
 import de.carne.jfx.fxml.FXMLController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -48,7 +49,7 @@ public abstract class DialogController<R> extends FXMLController<Dialog<R>> {
 	 * @param <C> The actual {@code DialogController} type.
 	 * @param owner The dialog's owner (may be null).
 	 * @param dialogFactory The factory function used to create the actual dialog object by invoking it with the
-	 *        constructed controller.
+	 * constructed controller.
 	 * @param controllerClass The controller class to use.
 	 * @return The constructed controller which is bound to the newly created dialog.
 	 * @throws IOException if an I/O error occurs during dialog loading.

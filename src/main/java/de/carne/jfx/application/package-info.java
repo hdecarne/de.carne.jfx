@@ -17,4 +17,4 @@
 @NonNullByDefault
 package de.carne.jfx.application;
 
-import de.carne.boot.check.NonNullByDefault;
+import org.eclipse.jdt.annotation.NonNullByDefault;

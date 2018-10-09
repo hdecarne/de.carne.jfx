@@ -19,8 +19,9 @@ package de.carne.jfx.scene.control;
 import java.util.Collection;
 import java.util.logging.LogRecord;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import de.carne.boot.Exceptions;
-import de.carne.boot.check.Nullable;
 import de.carne.jfx.stage.logview.LogViewFormats;
 import de.carne.jfx.stage.logview.LogViewImages;
 import javafx.collections.FXCollections;

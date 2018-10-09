@@ -24,8 +24,9 @@ import java.util.function.Function;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import de.carne.boot.ShutdownHooks;
-import de.carne.boot.check.Nullable;
 import de.carne.boot.logging.Log;
 import de.carne.jfx.fxml.FXMLController;
 import de.carne.jfx.scene.control.DialogController;
@@ -131,7 +132,7 @@ public abstract class StageController extends FXMLController<Stage> {
 	 * @param <R> The actual dialog result type.
 	 * @param <C> The actual controller type.
 	 * @param dialogFactory The factory function used to create the actual dialog object by invoking it with the
-	 *        constructed controller.
+	 * constructed controller.
 	 * @param controllerClass The controller class to use.
 	 * @return The constructed controller which is bound to the newly created dialog.
 	 * @throws IOException if an I/O error occurs during dialog loading.

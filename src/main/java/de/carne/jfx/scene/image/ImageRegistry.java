@@ -22,8 +22,9 @@ import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.TreeMap;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import de.carne.boot.check.Check;
-import de.carne.boot.check.Nullable;
 import javafx.scene.image.Image;
 
 /**
@@ -53,7 +54,7 @@ public final class ImageRegistry<K> {
 	 * @param key The key to associate the image with.
 	 * @param image The image to register.
 	 * @return The previously registered image, or {@code null} if no image has yet been registered for the submitted
-	 *         key and image size.
+	 * key and image size.
 	 */
 	public Image registerImage(K key, Image image) {
 		return this.imageMap.put(new CompositeKey(key, image.getHeight(), image.getWidth()), image);

@@ -21,8 +21,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import de.carne.boot.Exceptions;
-import de.carne.boot.check.Nullable;
 import de.carne.jfx.scene.control.DialogController;
 import de.carne.util.ManifestInfos;
 import javafx.fxml.FXML;

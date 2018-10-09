@@ -23,9 +23,10 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import de.carne.boot.logging.Log;
+import org.eclipse.jdt.annotation.Nullable;
+
 import de.carne.boot.check.Check;
-import de.carne.boot.check.Nullable;
+import de.carne.boot.logging.Log;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Window;
@@ -97,7 +98,7 @@ public abstract class FXMLController<U> {
 	 * @param <C> The actual {@code FXMLController} type.
 	 * @param owner The UI object's owner (may by {@code null}).
 	 * @param uiFactory The factory function used to create the actual UI object by invoking it with the constructed
-	 *        controller.
+	 * controller.
 	 * @param controllerClass The controller class to use.
 	 * @return The constructed controller which is bound to the constructed scene and UI object.
 	 * @throws IOException if an I/O error occurs during stage setup.
