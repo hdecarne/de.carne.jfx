@@ -1,9 +1,9 @@
-apply plugin: 'java-library'
-apply plugin: 'de.carne.gradleplugins.java'
-apply plugin: 'jacoco'
-apply plugin: 'maven'
-apply plugin: 'signing'
-apply plugin: 'eclipse'
+apply plugin: "java-library"
+apply plugin: "de.carne.gradleplugins.java"
+apply plugin: "jacoco"
+apply plugin: "maven"
+apply plugin: "signing"
+apply plugin: "eclipse"
 
 buildscript {
 	repositories {
@@ -22,7 +22,7 @@ targetCompatibility = 1.8
 repositories {
 	if(project.version.endsWith("-SNAPSHOT")) {
 		mavenLocal()
-		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+		maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 		maven { url "https://oss.jfrog.org/libs-snapshot/" }
 	} 
 	jcenter()
@@ -30,10 +30,7 @@ repositories {
 }
 
 dependencies {
-	implementation(group: "org.eclipse.jdt", name: "org.eclipse.jdt.annotation", version: "2.2.100")
-	configurations.runtime.exclude(group: "org.eclipse.jdt", module: "org.eclipse.jdt.annotation")
-	
-	implementation(group: "de.carne.common", name: "java-default", version: "8.7.0-SNAPSHOT")
+	api(group: "de.carne.common", name: "java-default", version: "8.7.0-SNAPSHOT")
 
 	testImplementation(group: "junit", name: "junit", version: "4.12")
 	testImplementation(group: "org.testfx", name: "testfx-core", version: "4.0.5-alpha")
@@ -57,12 +54,12 @@ jacocoTestReport {
 }
 
 task javadocJar(type: Jar) {
-	classifier = 'javadoc'
+	classifier = "javadoc"
 	from javadoc
 }
 
 task sourcesJar(type: Jar) {
-	classifier = 'sources'
+	classifier = "sources"
 	from sourceSets.main.allSource
 }
 
@@ -71,7 +68,7 @@ artifacts {
 }
 
 signing {
-	if (project.hasProperty('signing.keyId')) {
+	if (project.hasProperty("signing.keyId")) {
 		sign configurations.archives
 	}
 }
@@ -93,7 +90,7 @@ uploadArchives {
 			
 			pom.project {
 				name project.name
-				packaging 'jar'
+				packaging "jar"
 				description projectDescription
 				url projectUrl
 
@@ -107,7 +104,7 @@ uploadArchives {
 					license {
 						name projectLicense
 						url projectLicenseUrl
-						distribution 'repo'
+						distribution "repo"
 					}
 				}
 
@@ -129,9 +126,9 @@ eclipse {
 		downloadJavadoc = true
 		file {
 			whenMerged {
-				def jre = entries.find { it.path.contains 'org.eclipse.jdt.launching.JRE_CONTAINER' }
+				def jre = entries.find { it.path.contains "org.eclipse.jdt.launching.JRE_CONTAINER" }
 				
-				jre.accessRules.add(new org.gradle.plugins.ide.eclipse.model.AccessRule('0', 'javafx/**'))
+				jre.accessRules.add(new org.gradle.plugins.ide.eclipse.model.AccessRule("0", "javafx/**"))
 			}
 		}
 	}
