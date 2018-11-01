@@ -17,7 +17,6 @@
 package de.carne.jfx.fxml;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -121,8 +120,7 @@ public abstract class FXMLController<U> {
 		String packageName = controllerNameMatcher.group(1);
 		String bundleName = packageName + "." + baseName + "I18N";
 		ResourceBundle bundle = ResourceBundle.getBundle(bundleName);
-		FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(controllerClass.getResource(fxmlResourceName)),
-				bundle);
+		FXMLLoader loader = new FXMLLoader(Check.notNull(controllerClass.getResource(fxmlResourceName)), bundle);
 		Parent fxmlRoot = loader.load();
 		C controller = loader.getController();
 
