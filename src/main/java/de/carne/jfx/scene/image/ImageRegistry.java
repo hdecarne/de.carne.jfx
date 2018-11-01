@@ -24,7 +24,6 @@ import java.util.TreeMap;
 
 import org.eclipse.jdt.annotation.Nullable;
 
-import de.carne.boot.check.Check;
 import javafx.scene.image.Image;
 
 /**
@@ -146,7 +145,7 @@ public final class ImageRegistry<K> {
 
 		@Override
 		public int compareTo(@Nullable CompositeKey _o) {
-			CompositeKey o = Check.notNull(_o);
+			CompositeKey o = Objects.requireNonNull(_o);
 
 			int comparison = compareBaseKey(this.baseKey, o.baseKey);
 

@@ -16,9 +16,10 @@
  */
 package de.carne.jfx.test;
 
+import java.util.Objects;
+
 import org.eclipse.jdt.annotation.Nullable;
 
-import de.carne.boot.check.Check;
 import de.carne.jfx.stage.StageController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -30,7 +31,7 @@ public class JFXTestApplication extends Application {
 
 	@Override
 	public void start(@Nullable Stage primaryStage) throws Exception {
-		StageController.loadPrimaryStage(Check.notNull(primaryStage), JFXTestController.class).show();
+		StageController.loadPrimaryStage(Objects.requireNonNull(primaryStage), JFXTestController.class).show();
 	}
 
 }
