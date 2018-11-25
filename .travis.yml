@@ -1,6 +1,9 @@
 jdk:
   - oraclejdk8
 
+env:
+  JAVA_OPTS="-Xmx2g -Dfile.encoding=UTF-8"
+
 os:
   - linux
 
