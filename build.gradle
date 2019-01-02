@@ -30,7 +30,7 @@ repositories {
 }
 
 dependencies {
-	api(group: "de.carne.common", name: "java-default", version: "8.7.0-SNAPSHOT")
+	api(group: "de.carne.common", name: "java-default", version: "8.7.0")
 
 	testImplementation(group: "junit", name: "junit", version: "4.12")
 	testImplementation(group: "org.testfx", name: "testfx-core", version: "4.0.5-alpha")
