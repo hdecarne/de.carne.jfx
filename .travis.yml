@@ -23,12 +23,6 @@ notifications:
       - secure: YlgXwcZ6FKQw4qZvLHPu5+lM/BVCh0mZ5u0iwDsqWhuQakScbh0sbqqLaE0nEcSIUW0/1mtF7L1rmsr/b38AHua7T3q3UpEuINsnU589LAorNgGWho+BcKPFJihhvJxCATyDqEPMQTWve0xxVixDrYDs3U2TktM/EsrIKx8qsFtMpaGoCPFUOJKN4q8NLRhv+bt+X3j17SP4Vppf0qckOmql/sOLYuWc6oQ2x63qs2pe+MwueQCV13egy7irNZ8wRu96byz/9kI9ZF3KPv7YIwK7Dzqt5uWljxPO4BBuv88vtcRvbKL+nlOf3kkbbd4NIomdznxYpUhJ8QOObkQ0I33zAWDcZ+Of6FJvX2yINhKyi+3KkRZ2otUc+zlwYLNYXZPKWGTcbTd+RydW6KDyq5en9+zarfV3D6nql2yNZQxD6T6K2eoDVLYoZ0FjFdBpCNNKm0SSQv4nsyeTePgw/W80lSIceLP52AclpqkaltlO0YBNJs5C3qszavJAA6rXMsaqHLOA1ZPr8LEC2E+owgQQ/0YrRbHCy1eSfzkpYXDQOHYxIQQQFqVj7qqHyiaZr8TFBZVqplDnuuxv9BKY43Wz7V/h0ZyPc1LDpY4JRfnn222fld564ofy/DkEaoQ4oN0Uu0PEJEw96kE0IaDuvWnlN09Ik/69cFcZL5vF5WU=
     on_success: change
 
-# Install latest JDK, as JavaFX depends on it
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
-
 # See https://docs.travis-ci.com/user/languages/java/#caching
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
