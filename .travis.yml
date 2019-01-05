@@ -10,11 +10,11 @@ os:
 git:
   depth: false  
 
-script:
-  - ./gradlew check
-  - ./gradlew jacocoTestReport
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+install: ./gradlew --refresh-dependencies clean assemble
+
+script: ./gradlew build
+
+after_success: bash <(curl -s https://codecov.io/bash)
 
 notifications:
   email: false 
