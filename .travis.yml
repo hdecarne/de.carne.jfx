@@ -10,9 +10,9 @@ os:
 git:
   depth: false  
 
-install: ./gradlew --refresh-dependencies clean assemble
+install: ./gradlew --refresh-dependencies --stacktrace clean assemble testClasses
 
-script: ./gradlew build
+script: ./gradlew --stacktrace build
 
 after_success: bash <(curl -s https://codecov.io/bash)
 
