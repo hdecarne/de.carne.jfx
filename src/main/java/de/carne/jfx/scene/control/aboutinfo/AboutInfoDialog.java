@@ -39,7 +39,7 @@ public class AboutInfoDialog extends Dialog<ButtonType> {
 	 * @throws IOException if an I/O error occurs during dialog loading.
 	 */
 	public static AboutInfoController load(StageController owner) throws IOException {
-		return owner.loadDialog((c) -> new AboutInfoDialog(), AboutInfoController.class);
+		return owner.loadDialog(c -> new AboutInfoDialog(), AboutInfoController.class);
 	}
 
 }

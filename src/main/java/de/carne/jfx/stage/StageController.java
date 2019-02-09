@@ -59,7 +59,7 @@ public abstract class StageController extends FXMLController<Stage> {
 			Executors::newSingleThreadScheduledExecutor);
 
 	static {
-		ShutdownHooks.add(() -> EXECUTOR_SERVICE.toOptional().ifPresent(ScheduledExecutorService::shutdown));
+		ShutdownHooks.add(() -> EXECUTOR_SERVICE.getOptional().ifPresent(ScheduledExecutorService::shutdown));
 	}
 
 	private final AtomicInteger backgroundTaskCount = new AtomicInteger(0);

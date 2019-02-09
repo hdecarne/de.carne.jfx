@@ -28,7 +28,6 @@ import de.carne.jfx.scene.control.DialogController;
 import de.carne.util.ManifestInfos;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
@@ -44,11 +43,17 @@ public class AboutInfoController extends DialogController<ButtonType> {
 	@FXML
 	private TabPane ctlInfoTabs;
 
-	@Override
-	protected void setupDialog(Dialog<ButtonType> dialog) {
-		dialog.setTitle(AboutInfoI18N.formatSTR_STAGE_TITLE(ManifestInfos.APPLICATION_NAME));
-		dialog.setHeaderText(AboutInfoI18N.formatSTR_TEXT_HEADER(ManifestInfos.APPLICATION_NAME,
-				ManifestInfos.APPLICATION_VERSION, ManifestInfos.APPLICATION_BUILD));
+	/**
+	 * Set the module information.
+	 * 
+	 * @param moduleInfos the module information to display.
+	 * @return This controller.
+	 */
+	public AboutInfoController setModuleInfo(ManifestInfos moduleInfos) {
+		getUI().setTitle(AboutInfoI18N.formatSTR_STAGE_TITLE(moduleInfos.name()));
+		getUI().setHeaderText(
+				AboutInfoI18N.formatSTR_TEXT_HEADER(moduleInfos.name(), moduleInfos.version(), moduleInfos.build()));
+		return this;
 	}
 
 	/**
