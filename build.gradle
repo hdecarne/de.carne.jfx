@@ -30,11 +30,13 @@ repositories {
 }
 
 dependencies {
-	api(group: "de.carne.common", name: "java-default", version: "8.7.0")
+	compileOnly(group: "org.eclipse.jdt", name: "org.eclipse.jdt.annotation", version: project.annotationVersion)
+	testCompileOnly(group: "org.eclipse.jdt", name: "org.eclipse.jdt.annotation", version: project.annotationVersion)
+	api(group: "de.carne.common", name: "java-default", version: project.javaDefaultVersion)
 
-	testImplementation(group: "junit", name: "junit", version: "4.12")
-	testImplementation(group: "org.testfx", name: "testfx-core", version: "4.0.5-alpha")
-	testImplementation(group: "org.testfx", name: "openjfx-monocle", version: "8u20-b26")
+	testImplementation(group: "junit", name: "junit", version: project.junitVersion)
+	testImplementation(group: "org.testfx", name: "testfx-core", version: project.testfxCoreVersion)
+	testImplementation(group: "org.testfx", name: "openjfx-monocle", version: project.openjfxMonocleVersion)
 }
 
 jar {
