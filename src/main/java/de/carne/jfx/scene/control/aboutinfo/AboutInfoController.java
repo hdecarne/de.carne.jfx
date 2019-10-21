@@ -45,14 +45,14 @@ public class AboutInfoController extends DialogController<ButtonType> {
 
 	/**
 	 * Set the module information.
-	 * 
+	 *
 	 * @param moduleInfos the module information to display.
 	 * @return This controller.
 	 */
 	public AboutInfoController setModuleInfo(ManifestInfos moduleInfos) {
-		getUI().setTitle(AboutInfoI18N.formatSTR_STAGE_TITLE(moduleInfos.name()));
+		getUI().setTitle(AboutInfoI18N.strStageTitle(moduleInfos.name()));
 		getUI().setHeaderText(
-				AboutInfoI18N.formatSTR_TEXT_HEADER(moduleInfos.name(), moduleInfos.version(), moduleInfos.build()));
+				AboutInfoI18N.strTextHeader(moduleInfos.name(), moduleInfos.version(), moduleInfos.build()));
 		return this;
 	}
 

@@ -1,23 +1,33 @@
+plugins {
+	id "de.carne.java-tools" version "0.7.2" apply false
+}
+
 apply plugin: "java-library"
-apply plugin: "de.carne.gradleplugins.java"
+apply plugin: "de.carne.java-tools"
 apply plugin: "jacoco"
 apply plugin: "maven"
 apply plugin: "signing"
 apply plugin: "eclipse"
 
-buildscript {
-	repositories {
-		mavenLocal()
-		mavenCentral()
-		jcenter()
-	}
-	dependencies {
-		classpath("de.carne:java-gradleplugins:0.4.0")
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+	main {
+		java {
+			srcDir "${buildDir}/generated/main/java"
+		}
 	}
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+javatools {
+	generateI18N {
+		enabled = true
+		keyFilter = "^STR_.*"
+		genDir = file("${buildDir}/generated/main/java")
+		lineSeparator = "\n"
+	}
+}
 
 repositories {
 	if(project.version.endsWith("-SNAPSHOT")) {

@@ -45,7 +45,7 @@ public final class Alerts {
 	 * @return The created alert.
 	 */
 	public static Alert unexpected(Throwable throwable) {
-		return error(AlertType.ERROR, AlertsI18N.formatSTR_MESSAGE_UNEXPECTED_ERROR(), throwable);
+		return error(AlertType.ERROR, AlertsI18N.strMessageUnexpectedError(), throwable);
 	}
 
 	/**
@@ -61,7 +61,7 @@ public final class Alerts {
 
 		Alert alert = new Alert(type, message, ButtonType.OK);
 
-		alert.setHeaderText(AlertsI18N.formatSTR_MESSAGE_APPLICATION_ERROR());
+		alert.setHeaderText(AlertsI18N.strMessageApplicationError());
 		return DialogHelper.setExceptionContent(alert, throwable);
 	}
 
@@ -90,7 +90,7 @@ public final class Alerts {
 
 		Alert alert = new Alert(type, message, ButtonType.OK);
 
-		alert.setHeaderText(AlertsI18N.formatSTR_MESSAGE_APPLICATION_ERROR());
+		alert.setHeaderText(AlertsI18N.strMessageApplicationError());
 		return DialogHelper.setLogRecordsContent(alert, logs);
 	}
 

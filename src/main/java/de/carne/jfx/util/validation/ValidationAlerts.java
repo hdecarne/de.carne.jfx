@@ -40,7 +40,7 @@ public final class ValidationAlerts {
 	public static Alert error(ValidationException e) {
 		Alert alert = new Alert(AlertType.ERROR, e.getLocalizedMessage(), ButtonType.OK);
 
-		alert.setHeaderText(ValidationAlertsI18N.formatSTR_MESSAGE_VALIDATION_ERROR());
+		alert.setHeaderText(ValidationAlertsI18N.strMessageValidationError());
 		DialogHelper.setExceptionContent(alert, e.getCause());
 		return alert;
 	}

@@ -111,9 +111,9 @@ public class LogViewController extends StageController {
 		FileChooser chooser = new FileChooser();
 		List<ExtensionFilter> extensionFilters = new ArrayList<>();
 
-		extensionFilters.add(FileChooserHelper.filterFromString(LogViewI18N.formatSTR_FILTER_LOGFILES()));
-		extensionFilters.add(FileChooserHelper.filterFromString(LogViewI18N.formatSTR_FILTER_TXTFILES()));
-		extensionFilters.add(FileChooserHelper.filterFromString(LogViewI18N.formatSTR_FILTER_ALLFILES()));
+		extensionFilters.add(FileChooserHelper.filterFromString(LogViewI18N.strFilterLogfiles()));
+		extensionFilters.add(FileChooserHelper.filterFromString(LogViewI18N.strFilterTxtfiles()));
+		extensionFilters.add(FileChooserHelper.filterFromString(LogViewI18N.strFilterAllfiles()));
 		chooser.getExtensionFilters().addAll(extensionFilters);
 		chooser.setSelectedExtensionFilter(extensionFilters.get(0));
 
@@ -182,7 +182,7 @@ public class LogViewController extends StageController {
 
 	@Override
 	protected void setupStage(Stage stage) {
-		stage.setTitle(LogViewI18N.formatSTR_STAGE_TITLE());
+		stage.setTitle(LogViewI18N.strStageTitle());
 		this.ctlLogRecordLevel.setCellFactory(ImageViewTableCell.forTableColumn());
 		this.ctlLogRecordLevel.setCellValueFactory(new PropertyValueFactory<>("level"));
 		this.ctlLogRecordTime.setCellValueFactory(new PropertyValueFactory<>("time"));
