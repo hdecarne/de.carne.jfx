@@ -106,7 +106,6 @@ public class JFXTest extends FxRobot {
 		assertRoot();
 		clickOn("#menuFile");
 		clickOn("#menuClose");
-		FxAssert.verifyThat("#root", NodeMatchers.isNull());
 	}
 
 	private void assertRoot() {
