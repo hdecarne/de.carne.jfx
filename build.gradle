@@ -51,7 +51,19 @@ dependencies {
 
 jar {
 	manifest {
-		attributes "Automatic-Module-Name": automaticModuleName
+		attributes(
+			'Automatic-Module-Name': automaticModuleName,
+			'Created-By': "Gradle ${gradle.gradleVersion} (${System.properties['os.name']}:${System.properties['os.arch']}:${System.properties['os.version']})",
+			'Build-Jdk' : System.properties['java.version'],
+			'Build-Timestamp': new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ").format(new Date()),
+			'X-Compile-Target-JDK': targetCompatibility,
+			'X-Compile-Source-JDK': sourceCompatibility,
+			'X-Module-Id': project.name,
+			'X-Module-Name': project.name,
+			'X-Module-Version': project.version,
+			'X-Module-DocURL': projectUrl,
+			'X-Module-License': projectLicenseUrl
+		)
 	}
 }
 
