@@ -9,6 +9,8 @@ apply plugin: "maven"
 apply plugin: "signing"
 apply plugin: "eclipse"
 
+defaultTasks "classes", "testClasses"
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
