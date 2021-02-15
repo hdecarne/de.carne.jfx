@@ -32,13 +32,11 @@ javatools {
 }
 
 repositories {
-	if(project.version.endsWith("-SNAPSHOT")) {
-		mavenLocal()
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-		maven { url "https://oss.jfrog.org/libs-snapshot/" }
-	} 
-	jcenter()
 	mavenCentral()
+	if(project.version.endsWith("-SNAPSHOT")) {
+		maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+	} 
+	mavenLocal()
 }
 
 dependencies {
